@@ -34,9 +34,9 @@ purgeOldInstallation() {
     #remove old ufw port allow
     sudo ufw delete allow $COIN_PORT/tcp > /dev/null 2>&1
     #remove old files
-    if [ -d "~/$CONFIGFOLDERONLY" ]; then
-        sudo rm -rf ~/$CONFIGFOLDERONLY > /dev/null 2>&1
-    fi
+    #if [ -d "~/$CONFIGFOLDERONLY" ]; then #Depricated, possibly unnecessary
+        sudo rm -r ~/$CONFIGFOLDERONLY > /dev/null 2>&1
+    #fi
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && cd
     echo -e "${GREEN}* Done${NONE}";
@@ -130,7 +130,6 @@ function create_key() {
   $COIN_PATH$COIN_CLI stop
 fi
 clear
-}
 
 function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
