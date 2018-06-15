@@ -9,7 +9,7 @@ COIN_CLI='stonecoin-cli'
 COIN_TX='stonecoin-tx'
 COIN_PATH='/usr/local/bin/'
 COIN_REPO='https://github.com/stonecoinproject/stonecoin'
-COIN_TGZ='https://github.com/tomevoll/stonecoin/releases/download/v1.0.0.3-pre1/stonecrypto-1.0.0.3-linux64.tar.gz'
+COIN_TGZ='https://github.com/stonecoinproject/Stonecoin/releases/download/v2.0.0.0-beta1/stonecoin--linux64.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 SENTINEL_REPO='N/A'
 COIN_NAME='Stonecoin'
@@ -50,7 +50,7 @@ function download_node() {
   compile_error
   tar xvzf $COIN_ZIP >/dev/null 2>&1
   # need to make this auto update with new releases
-  cd stonecrypto-1.0.0/bin
+  cd stonecrypto-2.0.0/bin
   chmod +x $COIN_DAEMON $COIN_CLI
   cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd ~ >/dev/null 2>&1
@@ -141,9 +141,8 @@ masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 #Addnodes
-addnode=207.246.76.53:22323
 addnode=159.89.153.188:22323
-addnode=93.90.202.119:22323
+addnode=122.216.24.103:22323
 EOF
 }
 
