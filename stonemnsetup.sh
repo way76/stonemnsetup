@@ -280,7 +280,7 @@ function setup_node() {
 clear
 
 purgeOldInstallation
-checks
+#checks removed for temp
 prepare_system
 download_node
 setup_node
