@@ -130,6 +130,7 @@ function create_key() {
   $COIN_PATH$COIN_CLI stop
 fi
 clear
+}
 
 function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
