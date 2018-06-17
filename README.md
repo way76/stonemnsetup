@@ -1,4 +1,4 @@
-# Stonemnsetup 5 step simple guide for experienced users, for beginners please scroll down to the next section.
+# Stone Masternode Setup Guide: 5 step simple guide EXPERIENCED - Beginners scroll down to the next section.
 
 1. Open latest release Stone wallet found [HERE](https://github.com/stonecoinproject/Stonecoin/releases) Open Tools> Debug Console and type `masternode genkey` Copy the result.
 
@@ -17,7 +17,7 @@ Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, ac
 Stone donations go towards development
 * STONE: `Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz`
 
-# Stone Masternode Setup Guide (Ubuntu 16.04)
+# Stone Masternode Setup Guide (Ubuntu 16.04) BEGINNERS
 This guide will assist you in setting up a Stone Masternode on a Linux Server running Ubuntu 16.04 with a cold wallet, the safest way to run a masternode. (Use at your own risk)
 
 If you require further assistance contact the support team @ [Discord](https://discord.gg/2pr33nF)
