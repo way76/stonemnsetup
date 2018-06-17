@@ -12,9 +12,9 @@ mn1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c8
 
 5. Settings> Options> Wallet> Check "Show Masternodes Tab" then restart wallet. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in a few minutes.
 
-Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stonecoin Rockchain!!
+**Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stonecoin Rockchain!!**
 
-Stone donations go towards development
+**Stone donations go towards development**
 * STONE: `Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz`
 
 # Stone Masternode Setup Guide (Ubuntu 16.04) BEGINNERS
@@ -205,7 +205,7 @@ If you this worked for you please donate to help keep these easy to use methods 
 * BTC: `3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp`
 * XMR: `445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW`
 * LTC: `LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok`
-* Bcash: LOL
+* Bcash: `LOL`
 * RAVEN: `RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt`
 * STONE: `Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz`
 ***
