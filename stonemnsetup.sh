@@ -265,7 +265,7 @@ function important_information() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${RED}Donations go towards coin development :D${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${YELLOW}Stonecoin: SbzejNZ1swuE1WKKZP83yRQGfRitAFovD6${NC}"
+ echo -e "${YELLOW}Stonecoin: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  
  }
