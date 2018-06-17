@@ -24,7 +24,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 ## Requirements
 1) **1,500 Stone.**
-2) **A DigitalOcean VPS running Linux Ubuntu 16.04.** [DigitalOcean](https://m.do.co/c/6a9081c1f9a2)
+2) **A VPS running Linux Ubuntu 16.04.** Get $10 free with [DigitalOcean](https://m.do.co/c/6a9081c1f9a2)
 3) **A Windows local wallet.** [Stone GitHub](https://github.com/stonecoinproject/Stonecoin/releases)
 4) **An SSH client such as [puTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)**
 ***
