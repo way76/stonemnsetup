@@ -213,6 +213,7 @@ if [ -n "$(pidof $COIN_DAEMON)" ] || [ -e "$COIN_DAEMOM" ] ; then
 fi
 }
 
+# Cleanup, function depricated no compile required for future releases.
 function prepare_system() {
 echo -e "Preparing the VPS to setup. ${CYAN}$COIN_NAME${NC} ${RED}Masternode${NC}"
 apt-get update >/dev/null 2>&1
@@ -286,6 +287,6 @@ clear
 
 purgeOldInstallation
 #checks #removed for temp
-prepare_system
+#prepare_system
 download_node
 setup_node
