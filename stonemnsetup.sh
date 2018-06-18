@@ -287,6 +287,6 @@ clear
 
 purgeOldInstallation
 #checks #removed for temp
-#prepare_system
+prepare_system #some vps do not have curl preinstalled
 download_node
 setup_node
