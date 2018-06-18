@@ -198,7 +198,7 @@ Click "File Save" or ctrl+s to save.
 ***step 4***
 * Check the status of your masternode within the VPS by using the command below:
 
-`stone-cli masternode status`
+`stonecoin-cli masternode status`
 
 * You should see ***"Masternode successfully started"***
 
