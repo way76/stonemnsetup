@@ -2,7 +2,7 @@
 
 1. Open latest release Stone wallet found [HERE](https://github.com/stonecoinproject/Stonecoin/releases) Open Tools> Debug Console and type `masternode genkey` Copy the result.
 
-2. `wget -q https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh && bash stonemnsetup.sh`
+2. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 
 3. In windows wallet go to Tools> Open Masternode configuration file and fill out the form:
 
