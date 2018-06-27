@@ -113,26 +113,19 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***Step 7***
 * Paste the code below into the puTTY terminal then press enter (it will just go to a new line)
 
-`wget -q https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh`
+`wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 ***
 
 ***Step 8***
-* Paste the code below into the puTTY terminal then press enter
-
-`bash stonemnsetup.sh`
-
-***
-
-***Step 9***
 * Sit back and wait for the install (this will take 10-20 mins)
 ***
 
-***Step 10***
+***Step 9***
 * When prompted to enter your GEN key - press enter
 
 ***
 
-***Step 11***
+***Step 10***
 * You will now see all of the relavant information for your server.
 * Keep this terminal open as we will need the info for the wallet setup.
 ***
