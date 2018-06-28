@@ -176,6 +176,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 * The `PrivKey` is your masternode private key (This is also in the puTTY terminal that you have open).
 * The `TxHash` is the transaction ID/long key that you copied to the text file aka "masternode outputs".
 * The `Output Index` is the 0 or 1 that you copied to your text file.
+
 `# Format: alias IP:port masternodeprivkey collateral_output_txid collateral_output_index
 mn1`
 
