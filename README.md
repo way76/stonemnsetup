@@ -83,8 +83,37 @@ If you require further assistance contact the support team @ [Discord](https://d
 * Download the correct installer depending upon your operating system. Then follow the install instructions. 
 ***
 
+## Section C: Preparing the Local wallet
 
-## Section C: Connecting to the VPS & Installing the MN script via puTTY.
+***Step 1***
+* Download and install the Stone wallet [here](https://github.com/stonecoinproject/Stonecoin/releases)
+* Navigate to Settings > Options > Wallet tab check and make sure the "Show Masternodes Tab" is checked.
+***
+
+***Step 2***
+* Go to the receive tab and type in a name then press request payment. Copy the address from the window.
+* Send EXACLY 1,500 Stone to address you copied.
+***
+
+***Step 3***
+* Create a text document to temporarily store information that you will need. 
+***
+
+***step 4***
+* Go to the debug console within the wallet; Tools>Debug Console
+***
+
+***Step 5***
+* Type the command below and press enter 
+
+`masternode outputs` 
+
+***
+***Step 5***
+* Copy the two part result without any special characters. The first number is the masternode TX ID(Long) and the second is the Output index number(1 or 0). These will be used in the next section.
+***
+
+## Section D: Connecting to the VPS & Installing the MN script via puTTY.
 
 ***Step 1***
 * Copy your VPS IP (you can find this by going to the Droplets tab within DigitalOcean or the email sent after creating.
@@ -107,60 +136,37 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 
 ***Step 6*** 
-* The server will have you create a new password; right click again to paste the old password, then enter your new password twice. This should be a complex passphrase and don't forget to write it down!  
+* The server will have you create a new password; right click again to paste the old password, then enter your new password twice. This should be a complex passphrase. If you forget, there is always the forgot password function in the digital ocean dashboard.  
 ***
 
 ***Step 7***
-* Paste the code below into the puTTY terminal then press enter (it will just go to a new line)
+* Paste the code below into the puTTY terminal then press enter.
 
 `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 ***
 
 ***Step 8***
-* Sit back and wait for the install (this will take 10-20 mins)
+* Sit back and wait for the install (this could take 10-20 mins)
 ***
 
 ***Step 9***
-* When prompted to enter your GEN key - press enter
-
+* The script will walk you through 3 prompts:
+`Give your masternode a name:`
+* Enter any name you want, this will be the alias used when you receive payments.
+`Paste the transaction ID from masternode outputs:`
+* Enter the long hex you copied to your text file
+`Enter the output index number from masternode outputs 0 or 1:`
+* Enter the 1 or 0 you copied to your text file
+* Finally hit enter when you're ready to continue
 ***
 
 ***Step 10***
 * You will now see all of the relavant information for your server.
-* Keep this terminal open as we will need the info for the wallet setup.
-***
-
-## Section D: Preparing the Local wallet
-
-***Step 1***
-* Download and install the Stone wallet [here](https://github.com/stonecoinproject/Stonecoin/releases)
-* Go to the receive tab and type in a name then press request payment. Copy the address from the window.
-***
-
-***Step 2***
-* Send EXACLY 1,500 Stone to address you copied.
-***
-
-***Step 3***
-* Create a text document to temporarily store information that you will need. 
-***
-
-***step 4***
-* Go to the debug console within the wallet; Tools>Debug Console
-***
-
-***Step 5***
-* Type the command below and press enter 
-
-`masternode outputs` 
-
-***
-
-***Step 6***
-* Copy the green line that starts with the name you gave your masternodes, circled in red in the image.
-***
+* Copy the green line that starts with the name you gave your masternode, circled in red in the image.
 ![Example-OS](https://i.imgur.com/3rJA10P.png)
-# Section E: Connecting & Starting the masternode 
+***
+
+## Section E: Completing local setup and starting the masternode remotely
 
 ***Step 1***
 * Go to the tools > "masternode configuration file" 
@@ -168,22 +174,10 @@ If you require further assistance contact the support team @ [Discord](https://d
 
 ***Step 2***
 * Paste the green text line on a new line in this document then Save and Close.
-
-`MN01 127.0.0.1:22323 7QVJhUNrHXHvYTd6sqnMbbUcY6wFwNk2BwzBBmjC7VCkEhhHZSq 015486671794606c65ace7af97e2ee2c75615daadc280cbeeea09479251c268b 1`
-
-* Details for this file are written below:
-* For `Alias` type something like "MN1" **don't use spaces**
-* The `Address` is the IP:port of your server (this will be in the puTTY terminal that you still have open; 206.81.12.251:13058).
-* The `PrivKey` is your masternode private key (This is also in the puTTY terminal that you have open).
-* The `TxHash` is the transaction ID/long key that you copied to the text file aka "masternode outputs".
-* The `Output Index` is the 0 or 1 that you copied to your text file.
-
-Click "File > Save" or ctrl+s to save then close.
 ***
 
 ***Step 3***
 * Re-open your local wallet.
-* Navigate to Settings > Options > Wallet tab check and make sure the "Show Masternodes Tab" is checked.
 * In wallet main window, click on the Masternodes tab "My masternodes"
 * Click start all in the masternodes tab or right click the masternode and click "Start-alias".
 ***
