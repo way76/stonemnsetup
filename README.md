@@ -193,7 +193,6 @@ If you this worked for you please donate to help keep these easy to use methods 
 * BTC: `3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp`
 * XMR: `445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW`
 * LTC: `LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok`
-* Bcash: `LOL`
 * RAVEN: `RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt`
 * STONE: `Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz`
 ***
