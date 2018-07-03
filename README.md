@@ -1,17 +1,15 @@
-# Stone Masternode Setup Guide: 4 step simple guide EXPERIENCED - Beginners scroll down to the next section.
+# StoneCoin Masternode Setup Guide: 3 step simple guide EXPERIENCED - Beginners scroll down to the next section.
 
-1. Open latest release Stone wallet found [HERE](https://github.com/stonecoinproject/Stonecoin/releases) Open Tools> Debug Console and type `masternode genkey` Copy the result. (If you already have a Stonecoin 1.0 masternode you can use the same key as before)
+1. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 
-2. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
-
-3. In windows wallet go to Tools> Open Masternode configuration file and fill out the form:
+2. In windows wallet go to Tools> Open Masternode configuration file and fill out the form using the green line from the script:
 
 `# Format: alias IP:port masternodeprivkey collateral_output_txid collateral_output_index
 mn1`
 
 `MN1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0` Save and close.
 
-4. Settings> Options> Wallet> Check "Show Masternodes Tab" then restart wallet. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
+3. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
 
 **Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stonecoin Rockchain!!**
 
