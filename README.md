@@ -157,37 +157,34 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 
 ***Step 6***
-* Copy the long key (this is your transaction ID) and the 0 or 1 at the end (this is your output index)
-* Paste these into the text document you created earlier as you will need them in the next step.
+* Copy the green line that starts with the name you gave your masternodes, circled in red in the image.
 ***
-
+![Example-OS](https://i.imgur.com/3rJA10P.png)
 # Section E: Connecting & Starting the masternode 
 
 ***Step 1***
 * Go to the tools > "masternode configuration file" 
-
 ***
 
 ***Step 2***
+* Paste the green text line on a new line in this document then Save and Close.
 
-* Fill in the form. 
+`MN01 127.0.0.1:22323 7QVJhUNrHXHvYTd6sqnMbbUcY6wFwNk2BwzBBmjC7VCkEhhHZSq 015486671794606c65ace7af97e2ee2c75615daadc280cbeeea09479251c268b 1`
+
+* Details for this file are written below:
 * For `Alias` type something like "MN1" **don't use spaces**
 * The `Address` is the IP:port of your server (this will be in the puTTY terminal that you still have open; 206.81.12.251:13058).
 * The `PrivKey` is your masternode private key (This is also in the puTTY terminal that you have open).
 * The `TxHash` is the transaction ID/long key that you copied to the text file aka "masternode outputs".
 * The `Output Index` is the 0 or 1 that you copied to your text file.
 
-`# Format: alias IP:port masternodeprivkey collateral_output_txid collateral_output_index
-mn1`
-
-`MN1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0`
-
-Click "File Save" or ctrl+s to save.
+Click "File > Save" or ctrl+s to save then close.
 ***
 
 ***Step 3***
-* Close the wallet and reopen.
-* Click on the Masternodes tab "My masternodes"
+* Re-open your local wallet.
+* Navigate to Settings > Options > Wallet tab check and make sure the "Show Masternodes Tab" is checked.
+* In wallet main window, click on the Masternodes tab "My masternodes"
 * Click start all in the masternodes tab or right click the masternode and click "Start-alias".
 ***
 
