@@ -56,7 +56,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 
 ***Step 5*** 
-* Choose a server location (preferably somewhere close to you)
+* Choose a server location (preferably somewhere close to you).
 ![Example-Location](https://i.imgur.com/ecXeDvK.png)
 ***
 
