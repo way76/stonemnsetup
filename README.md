@@ -144,7 +144,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 
 ***Step 8***
-* Sit back and wait for the install (this could take 10-20 mins)
+* Sit back and wait for the install (this could take 10-20 mins).
 ***
 
 ***Step 9***
