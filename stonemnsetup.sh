@@ -20,7 +20,7 @@ NODEIP=$(curl -s4 icanhazip.com)
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
-CYAN="\033[0;36m" 
+CYAN="\033[0;36m"
 PURPLE="\033[0;35m"
 RED='\033[0;31m'
 GREEN="\033[0;32m"
@@ -242,31 +242,54 @@ fi
 clear
 }
 
+function masternode_info() {
+  echo
+  echo "Give your masternode a name: "
+  read mnAlias
+  echo "Paste the transaction ID from masternode outputs: "
+  read mnTx
+  echo "Enter the output index number from masternode outputs 0 or 1:"
+  read mnIndex
+  echo -e "Awesome you're almost done! Just paste the green line below into your local masternode.conf and then start alias."
+  echo "Press enter to continue"
+  read dumpEnter
+}
+
 function important_information() {
- echo
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT   OO   OO NN N NN EEEEE   CC     OO   OO  III  NN N NN     RRRRRR  OO   OO CC     KKKK    ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e    "${GREEN}       \$\$${NC}${CYAN}   TTT   OO   OO NN  NNN EE      CCC    OO   OO  III  NN  NNN ${NC}${GREEN}dot${NC}${CYAN} RR  RR  OO   OO CCC    KK KK       ${NC}${GREEN}\$\$ ${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${GREEN}$mnAlias $NODEIP:$COIN_PORT $COINKEY $mnTx $mnIndex"
+ #echo -e "${GREEN}Start:${NC}${RED}systemctl start $COIN_NAME.service${NC}"#section removed to avoid confusion
+ #echo -e "${GREEN}Stop:${NC}${RED}systemctl stop $COIN_NAME.service${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${PURPLE}Full Setup Guide. https://github.com/stonecoinproject/stonemnsetup/blob/master/README.md${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${GREEN}$COIN_NAME Masternode is up and running listening on port${NC}${PURPLE}$COIN_PORT${NC}."
- echo -e "${GREEN}Configuration file is:${NC}${RED}$CONFIGFOLDER/$CONFIG_FILE${NC}"
- echo -e "${GREEN}Start:${NC}${RED}systemctl start $COIN_NAME.service${NC}"
- echo -e "${GREEN}Stop:${NC}${RED}systemctl stop $COIN_NAME.service${NC}"
- echo -e "${GREEN}VPS_IP:${NC}${GREEN}$NODEIP:$COIN_PORT${NC}"
- echo -e "${GREEN}MASTERNODE GENKEY is:${NC}${PURPLE}$COINKEY${NC}"
- echo -e "${BLUE}================================================================================================================================"
- echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
- echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${CYAN}Ensure Node is fully SYNCED with BLOCKCHAIN.${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${GREEN}Usage Commands.${NC}"
- echo -e "${GREEN}$COIN_CLI masternode status${NC}"
- echo -e "${GREEN}$COIN_CLI getinfo.${NC}"
+ echo -e "${PURPLE}Usage Commands.${NC}"
+ echo -e "${PURPLE}Check masternode status: $COIN_CLI masternode status${NC}"
+ echo -e "${PURPLE}Check blockchain status: $COIN_CLI getinfo${NC}"
+ echo -e "${PURPLE}Restart daemon: $COIN_CLI stop${NC}"
+ echo -e "${PURPLE}VPS Configuration file location:${NC}${CYAN}$CONFIGFOLDER/$CONFIG_FILE${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${RED}Donations go towards coin development :D${NC}"
+ echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${RED}Donations go towards coin development${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${YELLOW}Stonecoin: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
+ echo -e "${YELLOW}BTC: 3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp${NC}"
+ echo -e "${YELLOW}XMR: 445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW${NC}"
+ echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
+ echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- 
+
  }
 
 function setup_node() {
@@ -275,6 +298,7 @@ function setup_node() {
   create_key
   update_config
   enable_firewall
+  masternode_info
   important_information
   configure_systemd
 }
