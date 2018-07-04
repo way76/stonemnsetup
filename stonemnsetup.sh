@@ -112,9 +112,10 @@ EOF
 }
 
 function create_key() {
-  echo -e "${YELLOW}Enter your ${RED}$COIN_NAME Masternode GEN Key${NC}."
-  read -e COINKEY
-  if [[ -z "$COINKEY" ]]; then
+  #Can be used in the future if we want to have users input their own key.
+  #echo -e "${YELLOW}Enter your ${RED}$COIN_NAME Masternode GEN Key${NC}."
+  #read -e COINKEY
+  sleep 10
   $COIN_PATH$COIN_DAEMON -daemon
   sleep 30
   if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
@@ -129,7 +130,6 @@ function create_key() {
     COINKEY=$($COIN_PATH$COIN_CLI masternode genkey)
   fi
   $COIN_PATH$COIN_CLI stop
-fi
 clear
 }
 
