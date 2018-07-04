@@ -1,4 +1,5 @@
 #!/bin/bash
+#Originally based on work by BitYoda, reworked and shortened for StoneCoin by CryproTYM
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='stonecoin.conf'
