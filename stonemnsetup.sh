@@ -246,14 +246,14 @@ clear
 function masternode_info() {
   echo
   echo "Give your masternode a name: "
-  read mnAlias
+  read mnAlias </dev/tty
   echo "Paste the transaction ID from masternode outputs: "
-  read mnTx
+  read mnTx </dev/tty
   echo "Enter the output index number from masternode outputs 0 or 1:"
-  read mnIndex
+  read mnIndex </dev/tty
   echo -e "Awesome you're almost done! Just paste the green line below into your local masternode.conf and then start alias."
   echo "Press enter to continue"
-  read dumpEnter
+  read dumpEnter </dev/tty
 }
 
 function important_information() {
