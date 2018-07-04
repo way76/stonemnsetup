@@ -9,7 +9,7 @@ mn1`
 
 `MN1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0` Save and close.
 
-3. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
+3. First make sure the VPS Masternode fully synced, you can verify this by typing "stonecoin-cli getinfo" without quotes. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
 
 **Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stonecoin Rockchain!!**
 
@@ -167,7 +167,11 @@ If you require further assistance contact the support team @ [Discord](https://d
 ## Section E: Completing local setup and starting the masternode remotely
 
 ***Step 1***
-* Go to the tools > "masternode configuration file" 
+* Go to the tools > "masternode configuration file" or navigate to the proper directory for your operating system:
+- Windows: %APPDATA%\StoneCrypto\
+
+- Mac OS: ~/Library/Application Support/StoneCrypto/ Unix/Linux: ~/.stonecrypto/
+( make sure that your library is visible, how to : https://knowledge.autodesk.com/support/fusion-360/troubleshooting/caas/sfdcarticles/sfdcarticles/How-to-Access-Hidden-User-Library-folder-on-Mac-OS.html )
 ***
 
 ***Step 2***
@@ -176,6 +180,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 
 ***Step 3***
 * Re-open your local wallet.
+* Make sure the VPS Masternode fully synced, you can verify this by typing "stonecoin-cli getinfo" without quotes.
 * In wallet main window, click on the Masternodes tab "My masternodes"
 * Click start all in the masternodes tab or right click the masternode and click "Start-alias".
 ***
