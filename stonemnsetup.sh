@@ -9,7 +9,7 @@ CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
 COIN_TX='stone-tx'
-EXTRACT_DIR='stonecore-2.1.0/bin'#Can this be auto?
+EXTRACT_DIR='stonecore-2.1.0/bin'#Todo make this work and auto
 
 #Old for removal
 OLD_CONFIG_FILE='stonecoin.conf'
@@ -63,7 +63,7 @@ function download_node() {
   compile_error
   tar xvzf $COIN_ZIP >/dev/null 2>&1
   # need to make this auto update with new releases
-  cd $EXTRACT_DIR
+  cd stonecore-2.1.0/bin
   chmod +x $COIN_DAEMON $COIN_CLI
   cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd ~ >/dev/null 2>&1
