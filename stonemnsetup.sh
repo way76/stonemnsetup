@@ -50,8 +50,8 @@ purgeOldInstallation() {
     #    sudo rm -r ~/$CONFIGFOLDERONLY/ > /dev/null 2>&1
     #fi
     #remove binaries and Stone utilities
-    cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && cd
-    cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && cd
+    cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
+    cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     echo -e "${GREEN}* Done${NONE}";
 }
 
