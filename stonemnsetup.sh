@@ -63,7 +63,7 @@ function download_node() {
   compile_error
   tar xvzf $COIN_ZIP >/dev/null 2>&1
   # need to make this auto update with new releases
-  cd $EXTRACT_DIR
+  cd stonecore-2.1.0/bin
   chmod +x $COIN_DAEMON $COIN_CLI
   cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd ~ >/dev/null 2>&1
