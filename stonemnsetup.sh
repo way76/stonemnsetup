@@ -42,6 +42,7 @@ purgeOldInstallation() {
     echo -e "${GREEN}Searching and removing old $COIN_NAME files and configurations${NC}"
     #kill wallet daemon
     sudo killall OLD_COIN_DAEMON > /dev/null 2>&1
+    sudo killall COIN_DAEMON > /dev/null 2>&1
     #remove old ufw port allow - unecessary for new install or swap - use this for future user input scripts
     #sudo ufw delete allow $COIN_PORT/tcp > /dev/null 2>&1
     #remove old files but we will not for the swap
@@ -50,6 +51,7 @@ purgeOldInstallation() {
     #fi
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && cd
+    cd /usr/local/bin && sudo rm COIN_CLI COIN_TX COIN_DAEMON > /dev/null 2>&1 && cd
     echo -e "${GREEN}* Done${NONE}";
 }
 
