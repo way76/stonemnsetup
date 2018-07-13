@@ -2,13 +2,23 @@
 #Originally based on work by BitYoda, reworked and shortened for StoneCoin by CryproTYM
 
 TMP_FOLDER=$(mktemp -d)
+#new
 CONFIG_FILE='stone.conf'
 CONFIGFOLDER='/root/.stonecore'
 CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
 COIN_TX='stone-tx'
-COIN_PATH='/usr/local/bin/'
+EXTRACT_DIR='stonecrypto-2.1.0/bin'#Can this be auto?
+
+#Old for removal
+OLD_CONFIG_FILE='stonecoin.conf'
+OLD_CONFIGFOLDER='/root/.stonecrypto'
+OLD_CONFIGFOLDERONLY='.stonecrypto'
+OLD_COIN_DAEMON='stonecoind'
+OLD_COIN_CLI='stonecoin-cli'
+OLD_COIN_TX='stonecoin-tx'
+OLD_COIN_PATH='/usr/local/bin/'
 COIN_REPO='https://github.com/stonecoinproject/stonecoin'
 COIN_TGZ='https://github.com/stonecoinproject/Stonecoin/releases/download/v2.0.0.0-beta1/stonecoin--linux64.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
@@ -31,15 +41,15 @@ MAG='\e[1;35m'
 purgeOldInstallation() {
     echo -e "${GREEN}Searching and removing old $COIN_NAME files and configurations${NC}"
     #kill wallet daemon
-    sudo killall $COIN_DAEMON > /dev/null 2>&1
-    #remove old ufw port allow
-    sudo ufw delete allow $COIN_PORT/tcp > /dev/null 2>&1
-    #remove old files
+    sudo killall OLD_COIN_DAEMON > /dev/null 2>&1
+    #remove old ufw port allow - unecessary for new install or swap - use this for future user input scripts
+    #sudo ufw delete allow $COIN_PORT/tcp > /dev/null 2>&1
+    #remove old files but we will not for the swap
     #if [ -d "~/$CONFIGFOLDERONLY" ]; then #Depricated, possibly unnecessary
-        sudo rm -r ~/$CONFIGFOLDERONLY > /dev/null 2>&1
+    #    sudo rm -r ~/$CONFIGFOLDERONLY/ > /dev/null 2>&1
     #fi
     #remove binaries and Stone utilities
-    cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && cd
+    cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && cd
     echo -e "${GREEN}* Done${NONE}";
 }
 
@@ -51,7 +61,7 @@ function download_node() {
   compile_error
   tar xvzf $COIN_ZIP >/dev/null 2>&1
   # need to make this auto update with new releases
-  cd stonecrypto-2.0.0/bin
+  cd $EXTRACT_DIR
   chmod +x $COIN_DAEMON $COIN_CLI
   cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd ~ >/dev/null 2>&1
