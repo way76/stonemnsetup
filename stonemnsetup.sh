@@ -9,7 +9,7 @@ CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
 COIN_TX='stone-tx'
-EXTRACT_DIR='~/stonecore-2.1.0/bin'#Can this be auto?
+EXTRACT_DIR='stonecore-2.1.0/bin'#Can this be auto?
 
 #Old for removal
 OLD_CONFIG_FILE='stonecoin.conf'
