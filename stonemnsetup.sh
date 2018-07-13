@@ -2,18 +2,18 @@
 #Originally based on work by BitYoda, reworked and shortened for StoneCoin by CryproTYM
 
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='stonecoin.conf'
-CONFIGFOLDER='/root/.stonecrypto'
-CONFIGFOLDERONLY='.stonecrypto'
-COIN_DAEMON='stonecoind'
-COIN_CLI='stonecoin-cli'
-COIN_TX='stonecoin-tx'
+CONFIG_FILE='stone.conf'
+CONFIGFOLDER='/root/.stonecore'
+CONFIGFOLDERONLY='.stonecore'
+COIN_DAEMON='stoned'
+COIN_CLI='stone-cli'
+COIN_TX='stone-tx'
 COIN_PATH='/usr/local/bin/'
 COIN_REPO='https://github.com/stonecoinproject/stonecoin'
 COIN_TGZ='https://github.com/stonecoinproject/Stonecoin/releases/download/v2.0.0.0-beta1/stonecoin--linux64.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 SENTINEL_REPO='N/A'
-COIN_NAME='Stonecoin'
+COIN_NAME='STONE'
 COIN_PORT=22323
 RPC_PORT=22324
 
@@ -142,12 +142,7 @@ maxconnections=256
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-#Addnodes
-addnode=207.246.76.53:22323
-addnode=206.81.12.251:22323
-addnode=167.99.137.60:22323
-addnode=207.148.90.132:22323
-addnode=63.209.35.17:22323
+#Addnodes no longer needed :D
 EOF
 }
 
@@ -263,8 +258,6 @@ function important_information() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}$mnAlias $NODEIP:$COIN_PORT $COINKEY $mnTx $mnIndex"
- #echo -e "${GREEN}Start:${NC}${RED}systemctl start $COIN_NAME.service${NC}"#section removed to avoid confusion
- #echo -e "${GREEN}Stop:${NC}${RED}systemctl stop $COIN_NAME.service${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${PURPLE}Full Setup Guide. https://github.com/stonecoinproject/stonemnsetup/blob/master/README.md${NC}"
@@ -279,7 +272,7 @@ function important_information() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${RED}Donations go towards coin development${NC}"
+ echo -e "${RED}Donations go towards STONE development${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${YELLOW}Stonecoin: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
  echo -e "${YELLOW}BTC: 3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp${NC}"
