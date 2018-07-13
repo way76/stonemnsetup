@@ -9,7 +9,7 @@ CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
 COIN_TX='stone-tx'
-EXTRACT_DIR='stonecrypto-2.1.0/bin'#Can this be auto?
+EXTRACT_DIR='stonecore-2.1.0/bin'#Can this be auto?
 
 #Old for removal
 OLD_CONFIG_FILE='stonecoin.conf'
@@ -23,7 +23,7 @@ COIN_REPO='https://github.com/stonecoinproject/stonecoin'
 COIN_TGZ='https://github.com/stonecoinproject/Stonecoin/releases/download/v2.1.0.1/stonecore-2.1.0-linux64.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 SENTINEL_REPO='N/A'
-COIN_NAME='STONE'
+COIN_NAME='Stone'
 COIN_PORT=22323
 RPC_PORT=22324
 
