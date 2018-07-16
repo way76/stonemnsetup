@@ -337,7 +337,7 @@ function newInstall() {
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
-           [Nn]* ) echo "Restarting..."; sleep 2; break; chooseInstall;;
+           [Nn]* ) echo "Exiting..."; sleep 2; break;;
            * ) echo "Please answer yes or no.";;
        esac
    done
