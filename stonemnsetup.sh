@@ -1,5 +1,5 @@
 #!/bin/bash
-#Originally based on work by BitYoda, reworked and shortened for StoneCoin by CryproTYM
+#Originally based on work by BitYoda, reworked and optimized for StoneCoin by CryproTYM
 
 TMP_FOLDER=$(mktemp -d)
 #new
@@ -262,7 +262,7 @@ function masternode_info() {
   read dumpEnter </dev/tty
 }
 
-function important_information() {
+function newInstallInfo() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
@@ -297,7 +297,102 @@ function important_information() {
 
  }
 
-function setup_node() {
+function upgradeInfo() {
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+  echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
+  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT   OO   OO NN N NN EEEEE   CC     OO   OO  III  NN N NN     RRRRRR  OO   OO CC     KKKK    ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+  echo -e    "${GREEN}       \$\$${NC}${CYAN}   TTT   OO   OO NN  NNN EE      CCC    OO   OO  III  NN  NNN ${NC}${GREEN}dot${NC}${CYAN} RR  RR  OO   OO CCC    KK KK       ${NC}${GREEN}\$\$ ${NC}"
+  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${PURPLE}Congratulations! You've just upgraded your masternode.${NC}"
+  echo -e "${PURPLE}We hope you enjoyed another Stone simple script!${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${PURPLE}Usage Commands.${NC}"
+  echo -e "${PURPLE}Check version info: $COIN_DAEMOM --version${NC}"
+  echo -e "${PURPLE}Check masternode status: $COIN_CLI masternode status${NC}"
+  echo -e "${PURPLE}Check blockchain status: $COIN_CLI getinfo${NC}"
+  echo -e "${PURPLE}Restart daemon: $COIN_CLI stop${NC}"
+  echo -e "${PURPLE}VPS Configuration file location:${NC}${CYAN}$CONFIGFOLDER/$CONFIG_FILE${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${RED}Donations go towards STONE development${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  echo -e "${YELLOW}STONE: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
+  echo -e "${YELLOW}BTC: 3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp${NC}"
+  echo -e "${YELLOW}XMR: 445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW${NC}"
+  echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
+  echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
+  echo -e "${BLUE}================================================================================================================================${NC}"
+  exit 1
+}
+
+
+function newInstall() {
+   while true; do
+       echo "You chose to install a new STONE masternode."
+       read -p "Are you sure? (y/n): " yn
+       case $yn in
+           [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
+           [Nn]* ) echo "Restarting..."; sleep 2; break; chooseInstall;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
+
+function upgradeOnly() {
+   while true; do
+       echo "You chose to upgrade your existing STONE masternode."
+       read -p "Are you sure? (y/n): " yn
+       case $yn in
+           [Yy]* ) echo "This should only take a moment."; sleep 2; upgradeNode;;
+           [Nn]* ) echo "Restarting..."; sleep 2; break; chooseInstall;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
+
+function chooseInstall() {
+
+   title="Welcome To The STONE Masternode setup"
+   note="Note you must choose New Install if upgrading from 1.0"
+   prompt="Enter choice: "
+   options=("New Install" "Upgrade")
+
+   echo "Warming up..."
+   clear
+   echo "$title"
+   echo "$note"
+   echo "What would you like to do?"
+   PS3="$prompt "
+   select opt in "${options[@]}" "Quit"; do
+
+       case "$REPLY" in
+
+       1 ) newInstall;;
+       2 ) upgradeOnly;;
+
+       $(( ${#options[@]}+1 )) ) echo "Goodbye!"; exit 1;;
+       *) echo "Invalid option. Try another one.";continue;;
+
+       esac
+   done
+ }
+
+function upgradeNode() {
+  purgeOldInstallation
+  download_node
+  configure_systemd
+  upgradeInfo
+}
+
+function installNode() {
+  purgeOldInstallation
+  prepare_system #some vps do not have curl preinstalled
+  download_node
   get_ip
   create_config
   create_key
@@ -305,14 +400,9 @@ function setup_node() {
   enable_firewall
   configure_systemd
   masternode_info
-  important_information
+  newInstallInfo
 }
 
-
 ##### Main #####
-clear
-purgeOldInstallation
-#checks #removed for temp
-prepare_system #some vps do not have curl preinstalled
-download_node
-setup_node
+
+chooseInstall
