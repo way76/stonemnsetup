@@ -334,7 +334,7 @@ function upgradeInfo() {
 function newInstall() {
    while true; do
        echo "You chose to install a new STONE masternode."
-       read -p "Are you sure? (y/n): " yn
+       read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
            [Nn]* ) echo "Restarting..."; sleep 2; break; chooseInstall;;
@@ -346,7 +346,7 @@ function newInstall() {
 function upgradeOnly() {
    while true; do
        echo "You chose to upgrade your existing STONE masternode."
-       read -p "Are you sure? (y/n): " yn
+       read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This should only take a moment."; sleep 2; upgradeNode;;
            [Nn]* ) echo "Restarting..."; sleep 2; break; chooseInstall;;
@@ -367,7 +367,7 @@ function chooseInstall() {
    echo "$title"
    echo "$note"
    echo "What would you like to do?"
-   PS3="$prompt "
+   PS3="$prompt " </dev/tty
    select opt in "${options[@]}" "Quit"; do
 
        case "$REPLY" in
