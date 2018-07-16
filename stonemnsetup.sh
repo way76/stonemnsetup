@@ -294,7 +294,7 @@ function newInstallInfo() {
  echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
  echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
-
+ exit 1
  }
 
 function upgradeInfo() {
