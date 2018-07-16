@@ -368,9 +368,9 @@ function chooseInstall() {
    echo "$note"
    echo "What would you like to do?"
    PS3="$prompt "
-   select opt in "${options[@]}" "Quit"; do
+   select opt in "${options[@]}" "Quit"; do </dev/tty
 
-       case "$REPLY" in </dev/tty
+       case "$REPLY" in
 
        1 ) newInstall;;
        2 ) upgradeOnly;;
