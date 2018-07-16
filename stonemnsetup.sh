@@ -288,7 +288,7 @@ function important_information() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${RED}Donations go towards STONE development${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${YELLOW}Stonecoin: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
+ echo -e "${YELLOW}STONE: Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz${NC}"
  echo -e "${YELLOW}BTC: 3QFJ9UTJGbBHBYqZsqTzXHyxifML44Wdyp${NC}"
  echo -e "${YELLOW}XMR: 445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW${NC}"
  echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
@@ -311,7 +311,6 @@ function setup_node() {
 
 ##### Main #####
 clear
-
 purgeOldInstallation
 #checks #removed for temp
 prepare_system #some vps do not have curl preinstalled
