@@ -370,7 +370,7 @@ function chooseInstall() {
    PS3="$prompt "
    select opt in "${options[@]}" "Quit"; do
        read REPLY </dev/tty
-       case "$REPLY" in
+       case $REPLY in
 
        1 ) newInstall;;
        2 ) upgradeOnly;;
