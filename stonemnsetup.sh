@@ -358,28 +358,12 @@ function upgradeOnly() {
 function chooseInstall() {
 
    title="Welcome To The STONE Masternode setup"
-   note="Note you must choose New Install if upgrading from 1.0"
-   prompt="Enter choice: "
-   options=("New Install" "Upgrade")
 
    echo "Warming up..."
    clear
    echo "$title"
-   echo "$note"
-   echo "What would you like to do?"
-   PS3="$prompt "
-   select opt in "${options[@]}" "Quit"; </dev/tty do
-
-       case "$REPLY" in
-
-       1 ) newInstall;;
-       2 ) upgradeOnly;;
-
-       $(( ${#options[@]}+1 )) ) echo "Goodbye!"; exit 1;;
-       *) echo "Invalid option. Try another one.";continue;;
-
-       esac
-   done
+   newInstall
+   
  }
 
 function upgradeNode() {
