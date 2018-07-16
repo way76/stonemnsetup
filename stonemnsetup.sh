@@ -368,8 +368,8 @@ function chooseInstall() {
    echo "$note"
    echo "What would you like to do?"
    PS3="$prompt "
-   select opt in "${options[@]}" "Quit"; do </dev/tty
-
+   select opt in "${options[@]}" "Quit"; do
+       read REPLY </dev/tty
        case "$REPLY" in
 
        1 ) newInstall;;
