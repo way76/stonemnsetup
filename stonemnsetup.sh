@@ -338,7 +338,7 @@ function newInstall() {
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
-           [Nn]* ) echo "Restarting..."; sleep 2; mainMenu; exit;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
            * ) echo "Please answer yes or no.";;
        esac
    done
@@ -383,19 +383,15 @@ function menuLoop() {
 
 while [ opt != '' ]
     do
-    if [[ $opt = "" ]]; then
-            exit;
-    else
+
         case $opt in
-        1)option_picked "Option 1 Picked";
-        newInstall;
+        1)newInstall;
         ;;
 
-        2)option_picked "Option 2 Picked";
-        upgradeOnly;
+        2)upgradeOnly;
             ;;
 
-        3)option_picked "Exiting...";sleep 1;exit 0;
+        3)echo -e "Exiting...";sleep 1;exit 0;
         ;;
 
         \n)exit 0;
@@ -406,7 +402,7 @@ while [ opt != '' ]
         mainMenu;
         ;;
     esac
-fi
+
 done
 }
 function option_picked() {
