@@ -311,7 +311,7 @@ function upgradeInfo() {
   echo -e "${BLUE}================================================================================================================================${NC}"
   echo -e "${BLUE}================================================================================================================================${NC}"
   echo -e "${PURPLE}Usage Commands.${NC}"
-  echo -e "${PURPLE}Check version info: $COIN_DAEMOM --version${NC}"
+  echo -e "${PURPLE}Check version info: $COIN_DAEMON --version${NC}"
   echo -e "${PURPLE}Check masternode status: $COIN_CLI masternode status${NC}"
   echo -e "${PURPLE}Check blockchain status: $COIN_CLI getinfo${NC}"
   echo -e "${PURPLE}Restart daemon: $COIN_CLI stop${NC}"
