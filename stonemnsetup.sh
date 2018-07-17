@@ -376,7 +376,7 @@ function mainMenu () {
             i=0; CLEAR; CIVIS;NULL=/dev/null
     FOOT(){ MARK;TPUT 13 5
             printf "          ENTER - SELECT,NEXT            ";UNMARK;}
-   ARROW(){ read -s -n3 key >/dev/tty >&2
+   ARROW(){ read -s -n3 key </dev/tty
             if [[ $key = $ESC[A ]];then echo up;fi
             if [[ $key = $ESC[B ]];then echo dn;fi;}
       M0(){ TPUT 4 20;$e "New Install";}
