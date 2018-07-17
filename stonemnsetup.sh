@@ -155,6 +155,11 @@ maxconnections=256
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
+addnode=206.81.12.251:22323
+addnode=159.89.153.188:22323
+addnode=207.246.76.53:22323
+addnode=104.236.31.33:22323
+addnode=167.99.232.6:22323
 addnode=pool.stonecoinrocks:22323
 addnode=explorer.stonecoin.rocks:22323
 EOF
@@ -261,6 +266,43 @@ function masternode_info() {
   echo "Press enter to continue"
   read dumpEnter </dev/tty
 }
+
+function reSync() {
+  cat << EOF > /etc/systemd/system/$COIN_NAME.service
+[Unit]
+Description=$COIN_NAME service
+After=network.target
+[Service]
+User=root
+Group=root
+Type=forking
+#PIDFile=$CONFIGFOLDER/$COIN_NAME.pid
+ExecStart=$COIN_PATH$COIN_DAEMON -reindex -daemon -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER
+ExecStop=-$COIN_PATH$COIN_CLI -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER stop
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=10s
+StartLimitInterval=120s
+StartLimitBurst=5
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  systemctl daemon-reload
+  sleep 3
+  systemctl start $COIN_NAME.service
+  systemctl enable $COIN_NAME.service >/dev/null 2>&1
+}
+
+function clearBanned() {
+    echo -e "Doing some maintenance.."
+    sleep 2
+    $COIN_CLI clearbanned
+    $COIN_CLI stop
+    sleep 5
+}
+
 
 function newInstallInfo() {
  echo -e "${BLUE}================================================================================================================================${NC}"
@@ -416,6 +458,7 @@ function upgradeNode() {
   purgeOldInstallation
   download_node
   configure_systemd
+  clearBanned
   upgradeInfo
 }
 
@@ -429,6 +472,7 @@ function installNode() {
   update_config
   enable_firewall
   configure_systemd
+  clearBanned
   masternode_info
   newInstallInfo
 }
