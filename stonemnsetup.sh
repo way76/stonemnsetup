@@ -68,7 +68,6 @@ function download_node() {
   cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd ~ >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
-  clear
 }
 
 function configure_systemd() {
@@ -143,7 +142,6 @@ function create_key() {
     COINKEY=$($COIN_PATH$COIN_CLI masternode genkey)
   fi
   $COIN_PATH$COIN_CLI stop
-clear
 }
 
 function update_config() {
@@ -251,7 +249,6 @@ libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thre
 bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev libdb5.3++ unzip libzmq5"
  exit 1
 fi
-clear
 }
 
 function masternode_info() {
@@ -268,31 +265,13 @@ function masternode_info() {
 }
 
 function reSync() {
-  cat << EOF > /etc/systemd/system/$COIN_NAME.service
-[Unit]
-Description=$COIN_NAME service
-After=network.target
-[Service]
-User=root
-Group=root
-Type=forking
-#PIDFile=$CONFIGFOLDER/$COIN_NAME.pid
-ExecStart=$COIN_PATH$COIN_DAEMON -reindex -daemon -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER
-ExecStop=-$COIN_PATH$COIN_CLI -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER stop
-Restart=always
-PrivateTmp=true
-TimeoutStopSec=60s
-TimeoutStartSec=10s
-StartLimitInterval=120s
-StartLimitBurst=5
-[Install]
-WantedBy=multi-user.target
-EOF
-
-  systemctl daemon-reload
-  sleep 3
-  systemctl start $COIN_NAME.service
-  systemctl enable $COIN_NAME.service >/dev/null 2>&1
+    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database 
+    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat 
+    sleep 3
+    stone-cli stop
+    sleep 5
+    clearBanned
+    upgradeInfo
 }
 
 function clearBanned() {
@@ -305,6 +284,7 @@ function clearBanned() {
 
 
 function newInstallInfo() {
+ clear
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
@@ -340,6 +320,7 @@ function newInstallInfo() {
  }
 
 function upgradeInfo() {
+  clear
   echo -e "${BLUE}================================================================================================================================${NC}"
   echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
   echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
@@ -369,6 +350,7 @@ function upgradeInfo() {
   echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
   echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
   echo -e "${BLUE}================================================================================================================================${NC}"
+  
   exit 1
 }
 
@@ -398,8 +380,20 @@ function upgradeOnly() {
        esac
    done
  }
+ 
+ function reSyncConf() {
+   while true; do
+       echo "You chose to resync your existing STONE masternode."
+       read -p "Are you sure? (y/n): " yn </dev/tty
+       case $yn in
+           [Yy]* ) echo "This should only take a moment."; sleep 2; reSync;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
 
-mainMenu(){
+function mainMenu(){
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
     NUMBER=`echo "\033[33m"` #yellow
@@ -413,6 +407,7 @@ mainMenu(){
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${MENU}**${NUMBER} 1)${MENU} New Install ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 2)${MENU} Resync ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 3)${MENU} Exit${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
@@ -432,26 +427,23 @@ while [ opt != '' ]
 
         2)upgradeOnly;
             ;;
+            
+        3)reSyncConf;
+            ;;
 
-        3)echo -e "Exiting...";sleep 1;exit 0;
+        4)echo -e "Exiting...";sleep 1;exit 0;
         ;;
 
         \n)exit 0;
         ;;
 
         *)clear;
-        option_picked "Pick an option from the menu";
+        "Pick an option from the menu";
         mainMenu;
         ;;
     esac
 
 done
-}
-function option_picked() {
-    COLOR='\033[01;31m' # bold red
-    RESET='\033[00;00m' # normal white
-    MESSAGE=${@:-"${RESET}Error: No message passed"}
-    echo -e "${COLOR}${MESSAGE}${RESET}"
 }
 
 function upgradeNode() {
