@@ -330,14 +330,13 @@ function upgradeInfo() {
   exit 1
 }
 
-
 function newInstall() {
    while true; do
        echo "You chose to install a new STONE masternode."
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
-           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu;;
+           [Nn]* ) echo "Exiting..."; sleep 2; clear; mainMenu;;
            * ) echo "Please answer yes or no.";;
        esac
    done
@@ -355,7 +354,8 @@ function upgradeOnly() {
    done
  }
 
- function mainMenu () {
+
+function mainMenu () {
 
        E='echo -e';e='echo -en';trap "R;exit" 2
      ESC=$( $e "\e")
@@ -379,32 +379,31 @@ function upgradeOnly() {
    ARROW(){ read -s -n3 key 2>/dev/null >&2
             if [[ $key = $ESC[A ]];then echo up;fi
             if [[ $key = $ESC[B ]];then echo dn;fi;}
-      M0(){ TPUT  4 20;$e "New Install";}
-      M1(){ TPUT  5 20;$e "Upgrade";}
-      M2(){ TPUT  6 20;$e "EXIT   ";}
-      M3(){ TPUT  7 20;$e "";}
+      M0(){ TPUT 4 20;$e "New Install";}
+      M1(){ TPUT 5 20;$e "Upgrade";}
+      M2(){ TPUT 6 20;$e "EXIT ";}
+      M3(){ TPUT 7 20;$e "";}
        LM=3
-    MENU(){ for each in $(seq 0 $LM);do M${each};done;}
-     POS(){ if [[ $cur == up ]];then ((i--));fi
-            if [[ $cur == dn ]];then ((i++));fi
-            if [[ $i -lt 0   ]];then i=$LM;fi
-            if [[ $i -gt $LM ]];then i=0;fi;}
- REFRESH(){ after=$((i+1)); before=$((i-1))
-            if [[ $before -lt 0  ]];then before=$LM;fi
-            if [[ $after -gt $LM ]];then after=0;fi
-            if [[ $j -lt $i      ]];then UNMARK;M$before;else UNMARK;M$after;fi
-            if [[ $after -eq 0 ]] || [ $before -eq $LM ];then
-            UNMARK; M$before; M$after;fi;j=$i;UNMARK;M$before;M$after;}
-    INIT(){ R;HEAD;FOOT;MENU;}
-      SC(){ REFRESH;MARK;$S;$b;cur=`ARROW`;}
-      ES(){ MARK;$e "ENTER = main menu ";$b;read;INIT;};INIT
-   while [[ "$O" != " " ]]; do case $i in
-         0) S=M0;SC;if [[ $cur == "" ]];then  R; newInstall;fi;;
-         1) S=M1;SC;if [[ $cur == "" ]];then  R; upgradeOnly; fi;;
-         3) S=M2;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
-  esac;POS;done
- }
-
+       MENU(){ for each in $(seq 0 $LM);do M${each};done;}
+        POS(){ if [[ $cur == up ]];then ((i--));fi
+               if [[ $cur == dn ]];then ((i++));fi
+               if [[ $i -lt 0 ]];then i=$LM;fi
+               if [[ $i -gt $LM ]];then i=0;fi;}
+    REFRESH(){ after=$((i+1)); before=$((i-1))
+               if [[ $before -lt 0 ]];then before=$LM;fi
+               if [[ $after -gt $LM ]];then after=0;fi
+               if [[ $j -lt $i ]];then UNMARK;M$before;else UNMARK;M$after;fi
+               if [[ $after -eq 0 ]] || [ $before -eq $LM ];then
+               UNMARK; M$before; M$after;fi;j=$i;UNMARK;M$before;M$after;}
+       INIT(){ R;HEAD;FOOT;MENU;}
+         SC(){ REFRESH;MARK;$S;$b;cur=`ARROW`;}
+         ES(){ MARK;$e "ENTER = main menu ";$b;read;INIT;};INIT
+      while [[ "$O" != " " ]]; do case $i in
+            0) S=M0;SC;if [[ $cur == "" ]];then R; newInstall;fi;;
+            1) S=M1;SC;if [[ $cur == "" ]];then R; upgradeOnly; fi;;
+            3) S=M2;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
+     esac;POS;done
+    }
 
 function upgradeNode() {
   purgeOldInstallation
