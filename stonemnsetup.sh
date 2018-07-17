@@ -331,6 +331,7 @@ function upgradeInfo() {
 }
 
 
+
 function newInstall() {
    while true; do
        echo "You chose to install a new STONE masternode."
@@ -383,6 +384,29 @@ function option_picked() {
     echo -e "${COLOR}${MESSAGE}${RESET}"
 }
 
+function upgradeNode() {
+  purgeOldInstallation
+  download_node
+  configure_systemd
+  upgradeInfo
+}
+
+function installNode() {
+  purgeOldInstallation
+  prepare_system #some vps do not have curl preinstalled
+  download_node
+  get_ip
+  create_config
+  create_key
+  update_config
+  enable_firewall
+  configure_systemd
+  masternode_info
+  newInstallInfo
+}
+
+##### Main #####
+
 clear
 mainMenu
 while [ opt != '' ]
@@ -412,82 +436,3 @@ while [ opt != '' ]
     esac
 fi
 done
-
-<<<<<<< HEAD
-=======
-function mainMenu () {
-
-       E='echo -e';e='echo -en';trap "R;exit" 2
-     ESC=$( $e "\e")
-    TPUT(){ $e "\e[${1};${2}H";}
-   CLEAR(){ $e "\ec";}
-   CIVIS(){ $e "\e[?25l";}
-    DRAW(){ $e "\e%@\e(0";}
-   WRITE(){ $e "\e(B";}
-    MARK(){ $e "\e[7m";}
-  UNMARK(){ $e "\e[27m";}
-       R(){ CLEAR ;stty sane;$e "\ec\e[37;44m\e[J";};
-    HEAD(){ DRAW
-            for each in $(seq 1 13);do
-            $E "   x                                          x"
-            done
-            WRITE;MARK;TPUT 1 5
-            $E "         STONE MASTERNODE SETUP    ";UNMARK;}
-            i=0; CLEAR; CIVIS;NULL=/dev/null
-    FOOT(){ MARK;TPUT 13 5
-            printf "          ENTER - SELECT,NEXT            ";UNMARK;}
-   ARROW(){ read -s -n3 key </dev/tty
-            if [[ $key = $ESC[A ]];then echo up;fi
-            if [[ $key = $ESC[B ]];then echo dn;fi;}
-      M0(){ TPUT 4 20;$e "New Install";}
-      M1(){ TPUT 5 20;$e "Upgrade";}
-      M2(){ TPUT 6 20;$e "EXIT ";}
-      M3(){ TPUT 7 20;$e "";}
-       LM=3
-       MENU(){ for each in $(seq 0 $LM);do M${each};done;}
-        POS(){ if [[ $cur == up ]];then ((i--));fi
-               if [[ $cur == dn ]];then ((i++));fi
-               if [[ $i -lt 0 ]];then i=$LM;fi
-               if [[ $i -gt $LM ]];then i=0;fi;}
-    REFRESH(){ after=$((i+1)); before=$((i-1))
-               if [[ $before -lt 0 ]];then before=$LM;fi
-               if [[ $after -gt $LM ]];then after=0;fi
-               if [[ $j -lt $i ]];then UNMARK;M$before;else UNMARK;M$after;fi
-               if [[ $after -eq 0 ]] || [ $before -eq $LM ];then
-               UNMARK; M$before; M$after;fi;j=$i;UNMARK;M$before;M$after;}
-       INIT(){ R;HEAD;FOOT;MENU;}
-         SC(){ REFRESH;MARK;$S;$b;cur=`ARROW`;}
-         ES(){ MARK;$e "ENTER = main menu ";$b;read;INIT;};INIT
-      while [[ "$O" != " " ]]; do case $i in
-            0) S=M0;SC;if [[ $cur == "" ]];then R; newInstall;fi;;
-            1) S=M1;SC;if [[ $cur == "" ]];then R; upgradeOnly; fi;;
-            3) S=M2;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
-     esac;POS;done
-    }
->>>>>>> 2e380cf4bf1a28959c0ff9c5930b8edc0a8bff71
-
-function upgradeNode() {
-  purgeOldInstallation
-  download_node
-  configure_systemd
-  upgradeInfo
-}
-
-function installNode() {
-  purgeOldInstallation
-  prepare_system #some vps do not have curl preinstalled
-  download_node
-  get_ip
-  create_config
-  create_key
-  update_config
-  enable_firewall
-  configure_systemd
-  masternode_info
-  newInstallInfo
-}
-
-##### Main #####
-
-mainMenu
-#mainMenu2 # Need to fix this awesome menu, keeps skipping first user input...
