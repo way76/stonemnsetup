@@ -376,6 +376,38 @@ mainMenu(){
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
     read opt </dev/tty
+    menuLoop
+}
+
+function menuLoop() {
+
+while [ opt != '' ]
+    do
+    if [[ $opt = "" ]]; then
+            exit;
+    else
+        case $opt in
+        1)option_picked "Option 1 Picked";
+        newInstall;
+        ;;
+
+        2)option_picked "Option 2 Picked";
+        upgradeOnly;
+            ;;
+
+        3)option_picked "Exiting...";sleep 1;exit 0;
+        ;;
+
+        \n)exit 0;
+        ;;
+
+        *)clear;
+        option_picked "Pick an option from the menu";
+        mainMenu;
+        ;;
+    esac
+fi
+done
 }
 function option_picked() {
     COLOR='\033[01;31m' # bold red
@@ -409,30 +441,3 @@ function installNode() {
 
 clear
 mainMenu
-while [ opt != '' ]
-    do
-    if [[ $opt = "" ]]; then
-            exit;
-    else
-        case $opt in
-        1)option_picked "Option 1 Picked";
-        newInstall;
-        ;;
-
-        2)option_picked "Option 2 Picked";
-        upgradeOnly;
-            ;;
-
-        3)option_picked "Exiting...";sleep 1;exit 0;
-        ;;
-
-        \n)exit 0;
-        ;;
-
-        *)clear;
-        option_picked "Pick an option from the menu";
-        mainMenu;
-        ;;
-    esac
-fi
-done
