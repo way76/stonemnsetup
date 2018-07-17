@@ -330,17 +330,19 @@ function upgradeInfo() {
   exit 1
 }
 
+
 function newInstall() {
    while true; do
        echo "You chose to install a new STONE masternode."
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This may take some time, be patient and wait for the prompts."; sleep 2; installNode;;
-           [Nn]* ) echo "Exiting..."; sleep 2; clear; mainMenu;;
+           [Nn]* ) echo "Restarting..."; sleep 2; mainMenu; exit;;
            * ) echo "Please answer yes or no.";;
        esac
    done
  }
+
 
 function upgradeOnly() {
    while true; do
@@ -348,13 +350,71 @@ function upgradeOnly() {
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
            [Yy]* ) echo "This should only take a moment."; sleep 2; upgradeNode;;
-           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
            * ) echo "Please answer yes or no.";;
        esac
    done
  }
 
+mainMenu(){
+    NORMAL=`echo "\033[m"`
+    MENU=`echo "\033[36m"` #Blue
+    NUMBER=`echo "\033[33m"` #yellow
+    FGRED=`echo "\033[41m"`
+    RED_TEXT=`echo "\033[31m"`
+    ENTER_LINE=`echo "\033[33m"`
 
+
+    echo -e "${MENU}*********************************************${NORMAL}"
+    echo -e "${MENU}****Welcome to the STONE Masternode Setup****${NORMAL}"
+    echo -e "${MENU}*********************************************${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 1)${MENU} New Install ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 3)${MENU} Exit${NORMAL}"
+    echo -e "${MENU}*********************************************${NORMAL}"
+    echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
+    echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
+    read opt </dev/tty
+}
+function option_picked() {
+    COLOR='\033[01;31m' # bold red
+    RESET='\033[00;00m' # normal white
+    MESSAGE=${@:-"${RESET}Error: No message passed"}
+    echo -e "${COLOR}${MESSAGE}${RESET}"
+}
+
+clear
+mainMenu
+while [ opt != '' ]
+    do
+    if [[ $opt = "" ]]; then
+            exit;
+    else
+        case $opt in
+        1)option_picked "Option 1 Picked";
+        newInstall;
+        ;;
+
+        2)option_picked "Option 2 Picked";
+        upgradeOnly;
+            ;;
+
+        3)option_picked "Exiting...";sleep 1;exit 0;
+        ;;
+
+        \n)exit 0;
+        ;;
+
+        *)clear;
+        option_picked "Pick an option from the menu";
+        mainMenu;
+        ;;
+    esac
+fi
+done
+
+<<<<<<< HEAD
+=======
 function mainMenu () {
 
        E='echo -e';e='echo -en';trap "R;exit" 2
@@ -404,6 +464,7 @@ function mainMenu () {
             3) S=M2;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
      esac;POS;done
     }
+>>>>>>> 2e380cf4bf1a28959c0ff9c5930b8edc0a8bff71
 
 function upgradeNode() {
   purgeOldInstallation
@@ -429,3 +490,4 @@ function installNode() {
 ##### Main #####
 
 mainMenu
+#mainMenu2 # Need to fix this awesome menu, keeps skipping first user input...
