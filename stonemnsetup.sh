@@ -402,14 +402,13 @@ function mainMenu(){
     RED_TEXT=`echo "\033[31m"`
     ENTER_LINE=`echo "\033[33m"`
 
-
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${MENU}****Welcome to the STONE Masternode Setup****${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 1)${MENU} New Install ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 3)${MENU} Resync ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 4)${MENU} Exit${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 1)${MENU} New Install                          **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only                         **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 3)${MENU} Resync                               **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 4)${MENU} Exit                                 **${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
@@ -421,29 +420,22 @@ function menuLoop() {
 
 while [ opt != '' ]
     do
-
         case $opt in
         1)newInstall;
         ;;
-
         2)upgradeOnly;
-            ;;
-            
+        ;;        
         3)reSyncConf;
-            ;;
-
+        ;;
         4)echo -e "Exiting...";sleep 1;exit 0;
         ;;
-
         \n)exit 0;
         ;;
-
         *)clear;
         "Pick an option from the menu";
         mainMenu;
         ;;
     esac
-
 done
 }
 
