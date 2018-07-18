@@ -18,6 +18,8 @@ OLD_CONFIGFOLDERONLY='.stonecrypto'
 OLD_COIN_DAEMON='stonecoind'
 OLD_COIN_CLI='stonecoin-cli'
 OLD_COIN_TX='stonecoin-tx'
+
+#other settings
 COIN_PATH='/usr/local/bin/'
 COIN_REPO='https://github.com/stonecoinproject/stonecoin'
 COIN_TGZ='https://github.com/stonecoinproject/Stonecoin/releases/download/v2.1.0.1-9523a37/stonecore-2.1.0-linux64.tar.gz'
@@ -43,12 +45,11 @@ purgeOldInstallation() {
     #kill wallet daemon
     sudo killall $OLD_COIN_DAEMON > /dev/null 2>&1
     sudo killall $COIN_DAEMON > /dev/null 2>&1
-    #remove old ufw port allow - unecessary for new install or swap - use this for future user input scripts
-    #sudo ufw delete allow $COIN_PORT/tcp > /dev/null 2>&1
-    #remove old files but we will not for the swap
-    #if [ -d "~/$CONFIGFOLDERONLY" ]; then #Depricated, possibly unnecessary
-    #    sudo rm -r ~/$CONFIGFOLDERONLY/ > /dev/null 2>&1
-    #fi
+    #remove files
+    rm -r ~/.stonecrypto/blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database 
+    rm ~/.stonecrypto/peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
+    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database 
+    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat 
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
