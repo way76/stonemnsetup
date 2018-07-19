@@ -440,7 +440,7 @@ done
 }
 
 function upgradeNode() {
-  purgeOldInstallation
+  #purgeOldInstallation #Removed from upgrade only, use resync if necessary
   download_node
   configure_systemd
   clearBanned
