@@ -164,7 +164,6 @@ addnode=explorer.stonecoin.rocks:22323
 EOF
 }
 
-
 function enable_firewall() {
   echo -e "Installing and setting up firewall to allow ingress on port ${GREEN}$COIN_PORT${NC}"
   ufw allow $COIN_PORT/tcp comment "$COIN_NAME MN port" >/dev/null
@@ -173,7 +172,6 @@ function enable_firewall() {
   ufw default allow outgoing >/dev/null 2>&1
   echo "y" | ufw enable >/dev/null 2>&1
 }
-
 
 function get_ip() {
   declare -a NODE_IPS
@@ -198,7 +196,6 @@ function get_ip() {
   fi
 }
 
-
 function compile_error() {
 if [ "$?" -gt "0" ];
  then
@@ -206,7 +203,6 @@ if [ "$?" -gt "0" ];
   exit 1
 fi
 }
-
 
 function checks() {
 if [[ $(lsb_release -d) != *16.04* ]]; then
@@ -270,8 +266,8 @@ function reSync() {
     rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat 
     sleep 3
     stone-cli stop
+    echo - e "Fishing up..."
     sleep 5
-    clearBanned
     upgradeInfo
 }
 
@@ -339,6 +335,7 @@ function upgradeInfo() {
   echo -e "${PURPLE}Check masternode status: $COIN_CLI masternode status${NC}"
   echo -e "${PURPLE}Check blockchain status: $COIN_CLI getinfo${NC}"
   echo -e "${PURPLE}Restart daemon: $COIN_CLI stop${NC}"
+  echo -e "${PURPLE}Help faster sync snd unstuck: $COIN_CLI clearbanned${NC}"
   echo -e "${PURPLE}VPS Configuration file location:${NC}${CYAN}$CONFIGFOLDER/$CONFIG_FILE${NC}"
   echo -e "${BLUE}================================================================================================================================${NC}"
   echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
@@ -350,12 +347,9 @@ function upgradeInfo() {
   echo -e "${YELLOW}XMR: 445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW${NC}"
   echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
   echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
-  echo -e "${BLUE}================================================================================================================================${NC}"
-  
+  echo -e "${BLUE}================================================================================================================================${NC}" 
   exit 1
 }
-
-
 
 function newInstall() {
    while true; do
@@ -382,7 +376,7 @@ function upgradeOnly() {
    done
  }
  
- function reSyncConf() {
+function reSyncConf() {
    while true; do
        echo "You chose to resync your existing STONE masternode."
        read -p "Are you sure? (y/n): " yn </dev/tty
