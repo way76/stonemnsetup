@@ -46,10 +46,10 @@ purgeOldInstallation() {
     sudo killall $OLD_COIN_DAEMON > /dev/null 2>&1
     sudo killall $COIN_DAEMON > /dev/null 2>&1
     #remove files
-    rm -r ~/.stonecrypto/blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database 
+    rm -r ~/.stonecrypto/blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
     rm ~/.stonecrypto/peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database 
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat 
+    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
+    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
@@ -262,8 +262,8 @@ function masternode_info() {
 }
 
 function reSync() {
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database 
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat 
+    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
+    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     sleep 3
     stone-cli stop
     echo - e "Fishing up..."
@@ -280,14 +280,13 @@ function clearBanned() {
 }
 
 function goodBye() {
-clear
+ clear
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT   OO   OO NN N NN EEEEE   CC     OO   OO  III  NN N NN     RRRRRR  OO   OO CC     KKKK    ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e    "${GREEN}       \$\$${NC}${CYAN}   TTT   OO   OO NN  NNN EE      CCC    OO   OO  III  NN  NNN ${NC}${GREEN}dot${NC}${CYAN} RR  RR  OO   OO CCC    KK KK       ${NC}${GREEN}\$\$ ${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
- echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}Hope you enjoyed another script from STONE${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
@@ -296,8 +295,8 @@ clear
  echo -e "${BLUE}================================================================================================================================${NC}"
  exit 1
 }
- 
- function newInstallInfo() {
+
+function newInstallInfo() {
  clear
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
@@ -331,7 +330,7 @@ clear
  echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  exit 1
- }
+}
 
 function upgradeInfo() {
   clear
@@ -364,7 +363,7 @@ function upgradeInfo() {
   echo -e "${YELLOW}XMR: 445kB5Mxzj5LKeTt6RrgTvciqnPVT4HgyE4zN3grJTvaEyrCMuCPAyx7Kah3bq2RBZMoTauDDVFVvBuKcer5NnCKDoeT9DW${NC}"
   echo -e "${YELLOW}LTC: LgdPXvnYRvQoAVGZq2SUomZwkbv4Hjecok${NC}"
   echo -e "${YELLOW}RAVEN: RKUaCMEKqJi3ERnbEXXh9M3LKTK79hJuSt${NC}"
-  echo -e "${BLUE}================================================================================================================================${NC}" 
+  echo -e "${BLUE}================================================================================================================================${NC}"
   exit 1
 }
 
@@ -402,7 +401,7 @@ function upgradeOnly() {
        esac
    done
  }
- 
+
 function reSyncConf() {
    while true; do
        echo "You chose to resync your existing STONE masternode."
@@ -446,7 +445,7 @@ while [ opt != '' ]
         1)newInstall;
         ;;
         2)upgradeOnly;
-        ;;        
+        ;;
         3)reSyncConf;
         ;;
         4)unInstallConf;
