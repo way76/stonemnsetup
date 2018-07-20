@@ -294,7 +294,8 @@ clear
  echo -e "${PURPLE}We're sorry to see you go, come back soon!${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- }
+ exit 1
+}
  
  function newInstallInfo() {
  clear
@@ -388,7 +389,7 @@ function unInstallConf() {
            * ) echo "Please answer yes or no.";;
        esac
    done
- }
+}
 
 function upgradeOnly() {
    while true; do
@@ -425,11 +426,11 @@ function mainMenu(){
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${MENU}****Welcome to the STONE Masternode Setup****${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${MENU}**${NUMBER}  1)${MENU} New Install                         **${NORMAL}"
-    echo -e "${MENU}**${NUMBER}  2)${MENU} Upgrade only                        **${NORMAL}"
-    echo -e "${MENU}**${NUMBER}  3)${MENU} Resync                              **${NORMAL}"
-    echo -e "${MENU}**${NUMBER}  4)${MENU} Uninstall                           **${NORMAL}"
-    echo -e "${MENU}**${NUMBER}  5)${MENU} Exit                                **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 1)${MENU} New Install                         **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only                        **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 3)${MENU} Resync                              **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 4)${MENU} Uninstall                           **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 5)${MENU} Exit                                **${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
