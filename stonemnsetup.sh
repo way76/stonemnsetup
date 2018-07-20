@@ -272,15 +272,30 @@ function reSync() {
 }
 
 function clearBanned() {
-    echo -e "Doing some maintenance.."
+    echo -e "Doing some maintenance..."
     sleep 2
     $COIN_CLI clearbanned
     $COIN_CLI stop
     sleep 5
 }
 
-
-function newInstallInfo() {
+function goodBye() {
+clear
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e    "${GREEN}  \$\$${NC}${CYAN}        TTT   OO   OO NNN  NN EE      CCC    OO   OO  III  NNN  NN     RR   RR OO   OO CCC    KK KK  ${NC}${GREEN}\$\$      ${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT   OO   OO NN N NN EEEEE   CC     OO   OO  III  NN N NN     RRRRRR  OO   OO CC     KKKK    ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e    "${GREEN}       \$\$${NC}${CYAN}   TTT   OO   OO NN  NNN EE      CCC    OO   OO  III  NN  NNN ${NC}${GREEN}dot${NC}${CYAN} RR  RR  OO   OO CCC    KK KK       ${NC}${GREEN}\$\$ ${NC}"
+ echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${GREEN}Hope you enjoyed another script from STONE${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${PURPLE}We're sorry to see you go, come back soon!${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ echo -e "${BLUE}================================================================================================================================${NC}"
+ }
+ 
  clear
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}  TTTTTTT  OOOOO  NN   NN EEEEEEE  CCCCC  OOOOO  IIIII NN   NN     RRRRRR   OOOOO   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
@@ -290,7 +305,7 @@ function newInstallInfo() {
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
- echo -e "${GREEN}$mnAlias $NODEIP:$COIN_PORT $COINKEY $mnTx $mnIndex"
+ echo -e "${GREEN}$mnAlias $NODEIP:$COIN_PORT $COINKEY $mnTx $mnIndex${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${PURPLE}Full Setup Guide. https://github.com/stonecoinproject/stonemnsetup/blob/master/README.md${NC}"
@@ -362,7 +377,17 @@ function newInstall() {
        esac
    done
  }
-
+function unInstallConf() {
+   while true; do
+       echo "You chose to remove your STONE masternode."
+       read -p "Are you sure? (y/n): " yn </dev/tty
+       case $yn in
+           [Yy]* ) echo "This will only take a moment"; sleep 2; unInstall;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
 
 function upgradeOnly() {
    while true; do
@@ -399,10 +424,11 @@ function mainMenu(){
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${MENU}****Welcome to the STONE Masternode Setup****${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 1)${MENU} New Install                          **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only                         **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 3)${MENU} Resync                               **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 4)${MENU} Exit                                 **${NORMAL}"
+    echo -e "${MENU}**${NUMBER}  1)${MENU} New Install                         **${NORMAL}"
+    echo -e "${MENU}**${NUMBER}  2)${MENU} Upgrade only                        **${NORMAL}"
+    echo -e "${MENU}**${NUMBER}  3)${MENU} Resync                              **${NORMAL}"
+    echo -e "${MENU}**${NUMBER}  4)${MENU} Uninstall                           **${NORMAL}"
+    echo -e "${MENU}**${NUMBER}  5)${MENU} Exit                                **${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
@@ -421,7 +447,9 @@ while [ opt != '' ]
         ;;        
         3)reSyncConf;
         ;;
-        4)echo -e "Exiting...";sleep 1;exit 0;
+        4)unInstallConf;
+        ;;
+        5)echo -e "Exiting...";sleep 1;exit 0;
         ;;
         \n)exit 0;
         ;;
@@ -456,6 +484,12 @@ function installNode() {
   newInstallInfo
 }
 
+function unInstall() {
+    purgeOldInstallation
+    echo -e "Finalilzing the cleanup..."
+    sleep 5
+    goodBye
+}
 ##### Main #####
 
 clear
