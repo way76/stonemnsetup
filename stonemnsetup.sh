@@ -4,7 +4,7 @@
 TMP_FOLDER=$(mktemp -d)
 #new
 CONFIG_FILE='stone.conf'
-CONFIGFOLDER='/root/.stonecore'
+CONFIGFOLDER='~/.stonecore'
 CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
