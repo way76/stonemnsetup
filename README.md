@@ -1,4 +1,4 @@
-# StoneCoin Masternode Setup Guide: 3 step simple guide EXPERIENCED - Beginners scroll down to the next section.
+# Stone Masternode Setup Guide: 3 step simple guide EXPERIENCED - Beginners scroll down to the next section.
 
 1. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 
@@ -9,9 +9,9 @@ mn1`
 
 `MN1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0` Save and close.
 
-3. First make sure the VPS Masternode fully synced, you can verify this by typing "stonecoin-cli getinfo" without quotes. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
+3. First make sure the VPS Masternode fully synced, you can verify this by typing "stone-cli getinfo" without quotes. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
 
-**Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stonecoin Rockchain!!**
+**Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stone Rockchain!!**
 
 **Stone donations go towards development**
 * STONE: `Si8dAZHaP1utVqxJJf1t2KVU6cBkk6FrVz`
@@ -24,7 +24,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ## Requirements
 1) **1,500 Stone.**
 2) **A VPS running Linux Ubuntu 16.04.** Get $10 free with [DigitalOcean](https://m.do.co/c/6a9081c1f9a2)
-3) **A Windows local wallet.** [Stone GitHub](https://github.com/stonecoinproject/Stonecoin/releases)
+3) **A Windows local wallet.** [Stone GitHub](https://github.com/project/Stonecoin/releases)
 4) **An SSH client such as [puTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)**
 ***
 ## Contents
@@ -188,7 +188,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***step 4***
 * Check the status of your masternode within the VPS by using the command below:
 
-`stonecoin-cli masternode status`
+`stone-cli masternode status`
 
 * You should see ***"Masternode successfully started"***
 
