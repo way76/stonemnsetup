@@ -28,7 +28,7 @@ SENTINEL_REPO='N/A'
 COIN_NAME='Stone'
 COIN_PORT=22323
 RPC_PORT=22324
-
+DATE=$(date +"%Y%m%d%H%M")
 NODEIP=$(curl -s4 icanhazip.com)
 
 BLUE="\033[0;34m"
@@ -45,11 +45,18 @@ purgeOldInstallation() {
     #kill wallet daemon
     sudo killall $OLD_COIN_DAEMON > /dev/null 2>&1
     sudo killall $COIN_DAEMON > /dev/null 2>&1
+    #disable service
+    systemctl disable Stonecoin.service
+    systemctl disable Stone.service
+    systemctl stop Stonecoin.service
+    systemctl stop Stone.service
+    #backup wallet
+    mkdir ~/.stonebackups
+    mv ~/.stonecrypto/wallet.dat ~/.stonebackups/wallet.dat.1.$DATE
+    mv ~/.stonecore/wallet.dat ~/.stonebackups/wallet.dat.$DATE
     #remove files
-    rm -r ~/.stonecrypto/blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
-    rm ~/.stonecrypto/peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+    rm -r ~/.stonecrypto
+    rm -r ~/.stonecore
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
@@ -262,11 +269,21 @@ function masternode_info() {
 }
 
 function reSync() {
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
-    sleep 3
+    #backup wallet
+    mkdir ~/.stonebackups
+    mv ~/.stonecore/wallet.dat ~/.stonebackups/wallet.dat.$DATE
+    mv ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
+    sleep 1
+    #remove files
+    rm -r ~/.stonecore
+    sleep 1
+    #return settings
+    mkdir ~/.stonecore
+    mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
+    sleep2
+    #reset node
     stone-cli stop
-    echo - e "Fishing up..."
+    echo - e "Finishing up..."
     sleep 5
     upgradeInfo
 }
@@ -289,6 +306,8 @@ function goodBye() {
  echo -e "${GREEN}   \$\$\$\$\$${NC}${CYAN}    TTT    OOOO0  NN   NN EEEEEEE  CCCCC  OOOO0  IIIII NN   NN ${NC}${GREEN}dot${NC}${CYAN} RR   RR  OOOO0   CCCCC KK  KK  ${NC}${GREEN}\$\$\$\$\$  ${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
  echo -e "${GREEN}Hope you enjoyed another script from STONE${NC}"
+ echo -e "${BLUE}==================================================================================================================${NC}"
+ echo -e "${PURPLE}We made a backup of your wallet.dat in ~/.stonebackups in case there were coins left${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
  echo -e "${PURPLE}We're sorry to see you go, come back soon!${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
@@ -318,6 +337,7 @@ function newInstallInfo() {
  echo -e "${PURPLE}Check blockchain status: $COIN_CLI getinfo${NC}"
  echo -e "${PURPLE}Restart daemon: $COIN_CLI stop${NC}"
  echo -e "${PURPLE}VPS Configuration file location:${NC}${CYAN}$CONFIGFOLDER/$CONFIG_FILE${NC}"
+ echo -e "${PURPLE}Old wallet backup location:${NC}${CYAN}~/.stonebackups${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
  echo -e "${CYAN}Follow in Discord to stay updated.  https://discord.gg/8u7U3gh${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
@@ -345,6 +365,7 @@ function upgradeInfo() {
   echo -e "${PURPLE}Congratulations! You've just upgraded your masternode.${NC}"
   echo -e "${PURPLE}We hope you enjoyed another Stone simple script!${NC}"
   echo -e "${BLUE}==================================================================================================================${NC}"
+  echo -e "${PURPLE}We made a backup of your wallet.dat in ~/.stonebackups in case there were any coins${NC}"
   echo -e "${BLUE}==================================================================================================================${NC}"
   echo -e "${PURPLE}Usage Commands.${NC}"
   echo -e "${PURPLE}Check version info: $COIN_DAEMON --version${NC}"
