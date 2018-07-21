@@ -264,6 +264,8 @@ function masternode_info() {
 function reSync() {
     sudo systemctl disable Stone.service
     sudo systemctl stop Stone.service
+    #replace addnodes need to add new cat func
+    #sed -i "/\b\(addnode\)\b/d" ~/.stonecore/stone.conf
     mkdir ~/.stonebackups
     cp ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
     sleep 2
