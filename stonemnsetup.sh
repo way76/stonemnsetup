@@ -262,10 +262,21 @@ function masternode_info() {
 }
 
 function reSync() {
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
-    sleep 3
-    stone-cli stop
+    sudo systemctl disable Stone.service
+    sudo systemctl stop Stone.service
+    mkdir ~/.stonebackups
+    cp ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
+    sleep 2
+    rm -r ~/.stonecore #/blocks ~/.stonecore/chainstate ~/.stonecore/database
+    #rm ~/.stonecore #/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+    sleep 2
+    #stone-cli stop
+    mkdir ~/.stonecore
+    sleep 1
+    mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
+    sleep 1
+    sudo systemctl enable Stone.service
+    sudo systemctl start Stone.service
     echo - e "Fishing up..."
     sleep 5
     upgradeInfo
