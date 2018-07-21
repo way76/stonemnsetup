@@ -67,9 +67,9 @@ purgeOldInstallation() {
     sleep 1
     #remove files
     rm -r ~/.stonecrypto/ #blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
-   # rm ~/.stonecrypto/ #peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
+    #rm ~/.stonecrypto/ #peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
     rm -r ~/.stonecore/ #blocks ~/.stonecore/chainstate ~/.stonecore/database
-   # rm ~/.stonecore/ #peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+    #rm ~/.stonecore/ #peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
@@ -298,6 +298,10 @@ function reSync() {
     #stone-cli stop
     mkdir ~/.stonecore
     sleep 1
+    echo - e "Removing old and updating Bootstrap"
+    rm ~/.stonecore/bootstrap.dat
+    wget -q https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat
+    cp bootstrap.dat ~/.stonecore
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
     sudo systemctl enable Stone.service
