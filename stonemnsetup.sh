@@ -29,6 +29,16 @@ COIN_NAME='Stone'
 COIN_PORT=22323
 RPC_PORT=22324
 
+#addnodes
+ADDNODE1='pool.stonecoin.rocks:22323'
+ADDNODE2='explorer.stonecoin.rocks:22323'
+ADDNODE3=''
+ADDNODE4=''
+ADDNODE5=''
+ADDNODE6=''
+
+#data
+DATE=$(date +"%Y%m%d%H%M")
 NODEIP=$(curl -s4 icanhazip.com)
 
 BLUE="\033[0;34m"
@@ -45,11 +55,21 @@ purgeOldInstallation() {
     #kill wallet daemon
     sudo killall $OLD_COIN_DAEMON > /dev/null 2>&1
     sudo killall $COIN_DAEMON > /dev/null 2>&1
+    sudo systemctl disable Stonecoin.service
+    sudo systemctl stop Stonecoin.service
+    sudo systemctl disable Stone.service
+    sudo systemctl stop Stone.service
+    sleep 1
+    #Backup old just in case
+    mkdir ~/.stonebackups
+    cp ~/.stonecrypto/wallet.dat ~/.stonebackups/wallet.dat.1.$DATE
+    cp ~/.stonecore/wallet.dat ~/.stonebackups/wallet.dat.$DATE
+    sleep 1
     #remove files
-    rm -r ~/.stonecrypto/blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
-    rm ~/.stonecrypto/peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
-    rm -r ~/.stonecore/blocks ~/.stonecore/chainstate ~/.stonecore/database
-    rm ~/.stonecore/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+    rm -r ~/.stonecrypto/ #blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
+   # rm ~/.stonecrypto/ #peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
+    rm -r ~/.stonecore/ #blocks ~/.stonecore/chainstate ~/.stonecore/database
+   # rm ~/.stonecore/ #peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
