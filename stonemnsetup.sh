@@ -271,6 +271,14 @@ bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent
 fi
 }
 
+function newInstallKick() {
+    echo -e "syncing... It will show stopped a couple times.." && sleep 300
+    stone-cli clearbanned && sleep 10
+    stone-cli stop && sleep 60
+    stone-cli clearbanned && sleep 10
+    stone-cli stop && sleep 6
+}
+
 function masternode_info() {
   echo
   echo "Give your masternode a name: "
@@ -311,14 +319,6 @@ function reSync() {
     stone-cli clearbanned && sleep 10
     stone-cli stop && sleep 60
     upgradeInfo
-}
-
-function clearBanned() {
-    echo -e "Doing some maintenance..."
-    sleep 2
-    $COIN_CLI clearbanned
-    $COIN_CLI stop
-    sleep 5
 }
 
 function goodBye() {
@@ -522,7 +522,7 @@ function installNode() {
   update_config
   enable_firewall
   configure_systemd
-  clearBanned
+  newInstallKick
   masternode_info
   newInstallInfo
 }
