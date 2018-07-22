@@ -30,8 +30,8 @@ COIN_PORT=22323
 RPC_PORT=22324
 
 #addnodes
-ADDNODE1='pool.stonecoin.rocks:22323'
-ADDNODE2='explorer.stonecoin.rocks:22323'
+ADDNODE1='pool.stonecoin.rocks'
+ADDNODE2='explorer.stonecoin.rocks'
 ADDNODE3=''
 ADDNODE4=''
 ADDNODE5=''
@@ -177,13 +177,13 @@ maxconnections=256
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-addnode=206.81.12.251:22323
-addnode=159.89.153.188:22323
-addnode=207.246.76.53:22323
-addnode=104.236.31.33:22323
-addnode=167.99.232.6:22323
-addnode=pool.stonecoinrocks:22323
-addnode=explorer.stonecoin.rocks:22323
+addnode=206.81.12.251
+addnode=159.89.153.188
+addnode=207.246.76.53
+addnode=104.236.31.33
+addnode=167.99.232.6
+addnode=pool.stonecoinrocks
+addnode=explorer.stonecoin.rocks
 EOF
 }
 
@@ -287,26 +287,25 @@ function masternode_info() {
 function reSync() {
     sudo systemctl disable Stone.service
     sudo systemctl stop Stone.service
+    sleep 2
     #replace addnodes need to add new cat func
     #sed -i "/\b\(addnode\)\b/d" ~/.stonecore/stone.conf
     mkdir ~/.stonebackups
     cp ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
+    cp ~/.stonecore/wallet.dat ~/.stonebackups/wallet.dat.$DATE
     sleep 2
-    rm -r ~/.stonecore #/blocks ~/.stonecore/chainstate ~/.stonecore/database
-    #rm ~/.stonecore #/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+    rm -r ~/.stonecore
     sleep 2
-    #stone-cli stop
     mkdir ~/.stonecore
     sleep 1
     echo - e "Removing old and updating Bootstrap"
-    rm ~/.stonecore/bootstrap.dat
     wget -q https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat
-    cp bootstrap.dat ~/.stonecore
+    mv bootstrap.dat ~/.stonecore
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
     sudo systemctl enable Stone.service
     sudo systemctl start Stone.service
-    echo - e "Fishing up..."
+    echo - e "Finishing up..."
     sleep 5
     upgradeInfo
 }
