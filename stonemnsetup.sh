@@ -305,10 +305,10 @@ function reSync() {
     sleep 1
     sudo systemctl enable Stone.service
     sudo systemctl start Stone.service
-    echo - e "syncing..." && sleep 10
-    stone-cli clearbanned && sleep 3
+    echo -e "syncing... It will show stopped a couple times.." && sleep 18#0
+    stone-cli clearbanned && sleep 10
     stone-cli stop && sleep 30
-    stone-cli clearbanned && sleep 3
+    stone-cli clearbanned && sleep 10
     stone-cli stop && sleep 30
     upgradeInfo
 }
@@ -449,7 +449,7 @@ function reSyncConf() {
        echo "You chose to resync your existing STONE masternode."
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
-           [Yy]* ) echo "This should only take a moment."; sleep 2; reSync;;
+           [Yy]* ) echo "This should take about 5 minutes."; sleep 2; reSync;;
            [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
            * ) echo "Please answer yes or no.";;
        esac
