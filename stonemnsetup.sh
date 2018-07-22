@@ -508,7 +508,6 @@ function upgradeNode() {
   #purgeOldInstallation #Removed from upgrade only, use resync if necessary
   download_node
   configure_systemd
-  clearBanned
   upgradeInfo
 }
 
@@ -522,7 +521,7 @@ function installNode() {
   update_config
   enable_firewall
   configure_systemd
-  newInstallKick
+  #newInstallKick
   masternode_info
   newInstallInfo
 }
