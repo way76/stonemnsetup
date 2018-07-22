@@ -298,18 +298,18 @@ function reSync() {
     sleep 2
     mkdir ~/.stonecore
     sleep 1
-    echo - e "Adding a Bootstrap"
+    echo -e "Adding a Bootstrap"
     wget -q https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat
     mv bootstrap.dat ~/.stonecore
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
     sudo systemctl enable Stone.service
     sudo systemctl start Stone.service
-    echo -e "syncing... It will show stopped a couple times.." && sleep 18#0
+    echo -e "syncing... It will show stopped a couple times.." && sleep 300
     stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 30
+    stone-cli stop && sleep 60
     stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 30
+    stone-cli stop && sleep 60
     upgradeInfo
 }
 
