@@ -174,13 +174,8 @@ maxconnections=256
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-addnode=206.81.12.251:22323
-addnode=159.89.153.188:22323
-addnode=207.246.76.53:22323
-addnode=104.236.31.33:22323
-addnode=167.99.232.6:22323
-addnode=pool.stonecoinrocks:22323
-addnode=explorer.stonecoin.rocks:22323
+addnode=$ADDNODE1
+addnode=$ADDNODE2
 EOF
 }
 
