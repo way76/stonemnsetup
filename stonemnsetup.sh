@@ -280,7 +280,12 @@ function reSync() {
     sudo systemctl disable Stone.service
     sudo systemctl stop Stone.service
     #replace addnodes need to add new cat func
-    #sed -i "/\b\(addnode\)\b/d" ~/.stonecore/stone.conf
+    sed -i "/\b\(addnode\)\b/d" ~/.stonecore/stone.conf
+    cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
+    addnode=$ADDNODE1
+    addnode=$ADDNODE2
+    EOF
+    sleep 1
     mkdir ~/.stonebackups
     cp ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
     sleep 2
