@@ -294,7 +294,7 @@ function reSync() {
     sleep 1
     sudo systemctl enable Stone.service
     sudo systemctl start Stone.service
-    echo - e "Fishing up..."
+    echo -e "Finishing up..."
     sleep 5
     upgradeInfo
 }
