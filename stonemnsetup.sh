@@ -30,8 +30,8 @@ COIN_PORT=22323
 RPC_PORT=22324
 
 #addnodes
-ADDNODE1='pool.stonecoin.rocks'
-ADDNODE2='explorer.stonecoin.rocks'
+ADDNODE1='pool.stonecoin.rocks:22323'
+ADDNODE2='explorer.stonecoin.rocks:22323'
 ADDNODE3=''
 ADDNODE4=''
 ADDNODE5=''
@@ -67,9 +67,9 @@ purgeOldInstallation() {
     sleep 1
     #remove files
     rm -r ~/.stonecrypto/ #blocks ~/.stonecrypto/chainstate ~/.stonecrypto/database
-    #rm ~/.stonecrypto/ #peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
+   # rm ~/.stonecrypto/ #peers.dat ~/.stonecrypto/mncache.dat ~/.stonecrypto/banlist.dat
     rm -r ~/.stonecore/ #blocks ~/.stonecore/chainstate ~/.stonecore/database
-    #rm ~/.stonecore/ #peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
+   # rm ~/.stonecore/ #peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     #remove binaries and Stone utilities
     cd /usr/local/bin && sudo rm $OLD_COIN_CLI $OLD_COIN_TX $OLD_COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
     cd /usr/local/bin && sudo rm $COIN_CLI $COIN_TX $COIN_DAEMON > /dev/null 2>&1 && sleep 2 && cd
@@ -81,9 +81,6 @@ function download_node() {
   echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
   cd $TMP_FOLDER >/dev/null 2>&1
   wget -q $COIN_TGZ
-  echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Bootstrap${NC}"
-  wget -q https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat
-  cp bootstrap.dat ~/.stonecore
   #compile_error
   tar xvzf $COIN_ZIP >/dev/null 2>&1
   # need to make this auto update with new releases
@@ -177,13 +174,13 @@ maxconnections=256
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-addnode=206.81.12.251
-addnode=159.89.153.188
-addnode=207.246.76.53
-addnode=104.236.31.33
-addnode=167.99.232.6
-addnode=pool.stonecoinrocks
-addnode=explorer.stonecoin.rocks
+addnode=206.81.12.251:22323
+addnode=159.89.153.188:22323
+addnode=207.246.76.53:22323
+addnode=104.236.31.33:22323
+addnode=167.99.232.6:22323
+addnode=pool.stonecoinrocks:22323
+addnode=explorer.stonecoin.rocks:22323
 EOF
 }
 
@@ -271,14 +268,6 @@ bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent
 fi
 }
 
-function newInstallKick() {
-    echo -e "syncing... It will show stopped a couple times.." && sleep 300
-    stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 60
-    stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 6
-}
-
 function masternode_info() {
   echo
   echo "Give your masternode a name: "
@@ -295,30 +284,32 @@ function masternode_info() {
 function reSync() {
     sudo systemctl disable Stone.service
     sudo systemctl stop Stone.service
-    sleep 2
     #replace addnodes need to add new cat func
     #sed -i "/\b\(addnode\)\b/d" ~/.stonecore/stone.conf
     mkdir ~/.stonebackups
     cp ~/.stonecore/stone.conf ~/.stonebackups/stone.conf
-    cp ~/.stonecore/wallet.dat ~/.stonebackups/wallet.dat.$DATE
     sleep 2
-    rm -r ~/.stonecore
+    rm -r ~/.stonecore #/blocks ~/.stonecore/chainstate ~/.stonecore/database
+    #rm ~/.stonecore #/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     sleep 2
+    #stone-cli stop
     mkdir ~/.stonecore
     sleep 1
-    echo -e "Adding a Bootstrap"
-    wget -q https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat
-    mv bootstrap.dat ~/.stonecore
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
     sudo systemctl enable Stone.service
     sudo systemctl start Stone.service
-    echo -e "syncing... It will show stopped a couple times.." && sleep 300
-    stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 60
-    stone-cli clearbanned && sleep 10
-    stone-cli stop && sleep 60
+    echo - e "Fishing up..."
+    sleep 5
     upgradeInfo
+}
+
+function clearBanned() {
+    echo -e "Doing some maintenance..."
+    sleep 2
+    $COIN_CLI clearbanned
+    $COIN_CLI stop
+    sleep 5
 }
 
 function goodBye() {
@@ -449,7 +440,7 @@ function reSyncConf() {
        echo "You chose to resync your existing STONE masternode."
        read -p "Are you sure? (y/n): " yn </dev/tty
        case $yn in
-           [Yy]* ) echo "This should take about 5 minutes."; sleep 2; reSync;;
+           [Yy]* ) echo "This should only take a moment."; sleep 2; reSync;;
            [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
            * ) echo "Please answer yes or no.";;
        esac
@@ -508,6 +499,7 @@ function upgradeNode() {
   #purgeOldInstallation #Removed from upgrade only, use resync if necessary
   download_node
   configure_systemd
+  clearBanned
   upgradeInfo
 }
 
@@ -521,7 +513,7 @@ function installNode() {
   update_config
   enable_firewall
   configure_systemd
-  #newInstallKick
+  clearBanned
   masternode_info
   newInstallInfo
 }
