@@ -246,7 +246,8 @@ apt install -y software-properties-common >/dev/null 2>&1
 echo -e "${PURPLE}Adding bitcoin PPA repository"
 apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
 echo -e "Installing required packages, it may take some time to finish.${NC}"
-apt-get update >/dev/null 2>&1
+apt-get update -y >/dev/null 2>&1
+apt-get ufw -y >/dev/null 2>&1
 #apt-get install libzmq3-dev -y >/dev/null 2>&1
 apt-get install -y git wget curl >/dev/null 2>&1
 #if [ "$?" -gt "0" ];
