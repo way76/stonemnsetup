@@ -40,7 +40,7 @@ ADDNODE6=''
 #data
 DATE=$(date +"%Y%m%d%H%M")
 NODEIP=$(curl -s4 icanhazip.com)
-BOOTSTRAPURL='https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap2/bootstrap.dat'
+BOOTSTRAPURL='https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap3/bootstrap.dat'
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
