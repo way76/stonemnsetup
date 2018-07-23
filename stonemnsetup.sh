@@ -374,7 +374,7 @@ function newInstallInfo() {
  echo -e "${GREEN}$mnAlias $NODEIP:$COIN_PORT $COINKEY $mnTx $mnIndex${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
- echo -e "${PURPLE}Full Setup Guide. https://github.com/stonecoinproject/stonemnsetup/blob/master/README.md${NC}"
+ echo -e "${PURPLE}Full Setup Guide. https://github.com/stonecoinproject/stonemnsetup/${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
  echo -e "${CYAN}Ensure Node is fully SYNCED with BLOCKCHAIN.${NC}"
  echo -e "${BLUE}==================================================================================================================${NC}"
