@@ -40,6 +40,7 @@ ADDNODE6=''
 #data
 DATE=$(date +"%Y%m%d%H%M")
 NODEIP=$(curl -s4 icanhazip.com)
+BOOTSTRAPURL='https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap/bootstrap.dat'
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -130,6 +131,9 @@ EOF
 
 function create_config() {
   mkdir $CONFIGFOLDER >/dev/null 2>&1
+  wget $BOOTSTRAPURL
+  mv bootstrap.dat $CONFIGFOLDER
+  sleep 1
   RPCUSER=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
   RPCPASSWORD=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
   cat << EOF > $CONFIGFOLDER/$CONFIG_FILE
@@ -296,6 +300,9 @@ function reSync() {
     sleep 2
     #stone-cli stop
     mkdir ~/.stonecore
+    sleep 1
+    wget $BOOTSTRAPURL
+    mv bootstrap.dat $CONFIGFOLDER
     sleep 1
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
