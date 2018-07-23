@@ -9,7 +9,7 @@ CONFIGFOLDERONLY='.stonecore'
 COIN_DAEMON='stoned'
 COIN_CLI='stone-cli'
 COIN_TX='stone-tx'
-EXTRACT_DIR='stonecore-2.1.0/bin'#Todo make this work and auto
+EXTRACT_DIR='stonecore-2.1.0/bin' # Todo make this work and auto
 
 #Old for removal
 OLD_CONFIG_FILE='stonecoin.conf'
@@ -128,11 +128,37 @@ EOF
   fi
 }
 
+function wipe_config() {
+  echo -e "Stopping systemd.."
+  sudo systemctl disable Stone.service
+  sudo systemctl stop Stone.service
+  echo -e "Clearing current config file.."
+  sleep 1
+  rm ~/.stonecore/stone.conf
+  sleep 1
+  echo -e "Creating new config file.."
+  sleep 1
+}
 
-function create_config() {
+function reEnableSystemd() {
+  echo -e "Re-enabling systemd.."
+  sleep 1
+  systemctl daemon-reload
+  sleep 3
+  systemctl start $COIN_NAME.service
+  systemctl enable $COIN_NAME.service >/dev/null 2>&1
+  sleep 1
+}
+
+function addBootstrap() {
+  echo -e "Downloading Bootstrap"
   mkdir $CONFIGFOLDER >/dev/null 2>&1
   wget -q $BOOTSTRAPURL
   mv bootstrap.dat $CONFIGFOLDER
+  sleep 1
+}
+
+function create_config() {
   sleep 1
   RPCUSER=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
   RPCPASSWORD=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
@@ -299,10 +325,7 @@ function reSync() {
     #rm ~/.stonecore #/peers.dat ~/.stonecore/mncache.dat ~/.stonecore/banlist.dat
     sleep 2
     #stone-cli stop
-    mkdir ~/.stonecore
-    sleep 1
-    wget -q $BOOTSTRAPURL
-    mv bootstrap.dat $CONFIGFOLDER
+    addBootstrap
     sleep 1
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
     sleep 1
@@ -456,6 +479,18 @@ function reSyncConf() {
    done
  }
 
+function newGenKeyConf() {
+    while true; do
+        echo "You chose to create a new Genkey for your existing STONE masternode.(This should only be used if your node is fully synced)"
+        read -p "Are you sure? (y/n): " yn </dev/tty
+        case $yn in
+            [Yy]* ) echo "Please have your tx id and output index ready, we will ask for them shortly.."; sleep 2; newGenKey;;
+            [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
 function mainMenu(){
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
@@ -470,8 +505,9 @@ function mainMenu(){
     echo -e "${MENU}**${NUMBER} 1)${MENU} New Install                          **${NORMAL}"
     echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only                         **${NORMAL}"
     echo -e "${MENU}**${NUMBER} 3)${MENU} Resync                               **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 4)${MENU} Uninstall                            **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 5)${MENU} Exit                                 **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 4)${MENU} Create New GenKey                    **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 5)${MENU} Uninstall                            **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 6)${MENU} Exit                                 **${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
@@ -490,9 +526,11 @@ while [ opt != '' ]
         ;;
         3)reSyncConf;
         ;;
-        4)unInstallConf;
+        4)newGenKeyConf;
         ;;
-        5)echo -e "Exiting...";sleep 1;exit 0;
+        5)unInstallConf;
+        ;;
+        6)echo -e "Exiting...";sleep 1;exit 0;
         ;;
         \n)exit 0;
         ;;
@@ -517,12 +555,24 @@ function installNode() {
   prepare_system #some vps do not have curl preinstalled
   download_node
   get_ip
+  addBootstrap
   create_config
   create_key
   update_config
   enable_firewall
   configure_systemd
   clearBanned
+  masternode_info
+  newInstallInfo
+}
+
+function newGenKey() {
+  wipe_config
+  get_ip
+  create_config
+  create_key
+  update_config
+  reEnableSystemd
   masternode_info
   newInstallInfo
 }
