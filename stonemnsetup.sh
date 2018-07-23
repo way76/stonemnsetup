@@ -131,7 +131,7 @@ EOF
 
 function create_config() {
   mkdir $CONFIGFOLDER >/dev/null 2>&1
-  wget $BOOTSTRAPURL
+  wget -q $BOOTSTRAPURL
   mv bootstrap.dat $CONFIGFOLDER
   sleep 1
   RPCUSER=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
@@ -301,7 +301,7 @@ function reSync() {
     #stone-cli stop
     mkdir ~/.stonecore
     sleep 1
-    wget $BOOTSTRAPURL
+    wget -q $BOOTSTRAPURL
     mv bootstrap.dat $CONFIGFOLDER
     sleep 1
     mv ~/.stonebackups/stone.conf ~/.stonecore/stone.conf
