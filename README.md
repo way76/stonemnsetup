@@ -1,5 +1,6 @@
 [![Example-OS](https://img.youtube.com/vi/84zGqiFRWNs/0.jpg)](https://d.tube/#!/v/stonecoin/k62zwqkf)
 
+[Watch the short how to video!](https://d.tube/#!/v/stonecoin/k62zwqkf)
 # Masternode Setup Guide
 **3 step simple guide EXPERIENCED - Beginners scroll down to the next section.**
 
