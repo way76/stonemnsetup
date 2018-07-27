@@ -1,4 +1,6 @@
-# Stone Masternode Setup Guide: 3 step simple guide EXPERIENCED - Beginners scroll down to the next section.
+![Example-OS](https://i.imgur.com/gNQ1ge1.png)
+# Masternode Setup Guide
+**3 step simple guide EXPERIENCED - Beginners scroll down to the next section.**
 
 1. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
 
@@ -9,7 +11,7 @@ mn1`
 
 `MN1 YOUR_IP:22323 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0` Save and close.
 
-3. First make sure the VPS Masternode fully synced, you can verify this by typing "stone-cli getinfo" without quotes. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes.
+3. First make sure the VPS Masternode fully synced, you can verify this by typing "stone-cli getinfo" without quotes. Open masternodes tab, right click your masternode and "start alias." It will read PRE-ENABLED and will turn to ENABLED in about 15 minutes. NOTE: If you are getting read/write errors you need to run in root by typing `sudo su`.
 
 **Congratulations, you're now setup! Enjoy collecting your pebbles, trade them, accept them, Hodl them and may someday they turn into valuable Stones! Thank you for supporting the Stone Rockchain!!**
 
