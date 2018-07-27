@@ -1,8 +1,9 @@
-![Example-OS](https://i.imgur.com/gNQ1ge1.png)
+[![Example-OS](https://img.youtube.com/vi/84zGqiFRWNs/0.jpg)](https://d.tube/#!/v/stonecoin/k62zwqkf)
+
 # Masternode Setup Guide
 **3 step simple guide EXPERIENCED - Beginners scroll down to the next section.**
 
-1. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash`
+1. `wget -O - https://raw.githubusercontent.com/stonecoinproject/stonemnsetup/master/stonemnsetup.sh | bash` Use option #1, fill out the prompts and have your tx id/output index ready.
 
 2. In windows wallet go to Tools> Open Masternode configuration file and fill out the form using the green line from the script:
 
