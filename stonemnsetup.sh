@@ -40,7 +40,7 @@ ADDNODE6=''
 #data
 DATE=$(date +"%Y%m%d%H%M")
 NODEIP=$(curl -s4 icanhazip.com)
-BOOTSTRAPURL='https://github.com/stonecoinproject/Stonecoin/releases/download/bootstrap2/bootstrap.dat'
+BOOTSTRAPURL='https://github.com/stonecoinproject/Stonecoin/releases/download/Bootstrapv2.0/stonecore.tar.gz'
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -152,9 +152,11 @@ function reEnableSystemd() {
 
 function addBootstrap() {
   echo -e "Downloading Bootstrap"
-  mkdir $CONFIGFOLDER >/dev/null 2>&1
+  #mkdir $CONFIGFOLDER >/dev/null 2>&1
+  cd ~/
   wget -q $BOOTSTRAPURL
-  mv bootstrap.dat $CONFIGFOLDER
+  tar -xzf .stonecore.tar.gz
+  rm .stonecore.tar.gz
   sleep 1
 }
 
