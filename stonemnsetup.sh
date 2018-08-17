@@ -155,8 +155,8 @@ function addBootstrap() {
   #mkdir $CONFIGFOLDER >/dev/null 2>&1
   cd ~/
   wget -q $BOOTSTRAPURL
-  tar -xzf .stonecore.tar.gz
-  rm .stonecore.tar.gz
+  tar -xzf stonecore.tar.gz
+  rm stonecore.tar.gz
   sleep 1
 }
 
