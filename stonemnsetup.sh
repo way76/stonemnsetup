@@ -529,7 +529,7 @@ while [ opt != '' ]
         ;;
         3)reSyncConf;
         ;;
-        4)upgradeOnly;sleep 3; reSyncConf;
+        4)upgradeOnly;reSyncConf;
         ;;
         5)newGenKeyConf;
         ;;
