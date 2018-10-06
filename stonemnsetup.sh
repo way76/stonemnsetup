@@ -481,8 +481,8 @@ function reSyncConf() {
    done
  }
  function UpgradeAndResync() {
-    upgradeOnly
-    reSyncConf
+    upgradeOnly;
+    reSyncConf;
  }
 
 function newGenKeyConf() {
