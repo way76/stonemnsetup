@@ -507,9 +507,10 @@ function mainMenu(){
     echo -e "${MENU}**${NUMBER} 1)${MENU} New Install                          **${NORMAL}"
     echo -e "${MENU}**${NUMBER} 2)${MENU} Upgrade only                         **${NORMAL}"
     echo -e "${MENU}**${NUMBER} 3)${MENU} Resync                               **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 4)${MENU} Create New GenKey                    **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 5)${MENU} Uninstall                            **${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 6)${MENU} Exit                                 **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 4)${MENU} Upgrade and Resync                   **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 5)${MENU} Create New GenKey                    **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 6)${MENU} Uninstall                            **${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 7)${MENU} Exit                                 **${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Enter option and press enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     echo -e "${ENTER_LINE}Note: You must complete new install if you are upgrading from pre x16r${NORMAL}"
@@ -528,11 +529,13 @@ while [ opt != '' ]
         ;;
         3)reSyncConf;
         ;;
-        4)newGenKeyConf;
+        4)upgradeOnly;sleep 3; reSyncConf;
         ;;
-        5)unInstallConf;
+        5)newGenKeyConf;
         ;;
-        6)echo -e "Exiting...";sleep 1;exit 0;
+        6)unInstallConf;
+        ;;
+        7)echo -e "Exiting...";sleep 1;exit 0;
         ;;
         \n)exit 0;
         ;;
