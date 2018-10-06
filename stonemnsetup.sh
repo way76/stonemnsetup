@@ -481,9 +481,9 @@ function reSyncConf() {
    done
  }
  function UpgradeAndResync() {
-     upgradeNode;;
-     sleep 2;; 
-     reSync;;
+     #upgradeNode;;
+     #sleep 2;; 
+     #reSync;;
  }
 
 function newGenKeyConf() {
