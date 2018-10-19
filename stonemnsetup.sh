@@ -481,7 +481,8 @@ function reSyncConf() {
    done
  }
  function UpgradeAndResync() {
-   
+   upgradeOnly();
+   reSyncConf();
 
  }
 
