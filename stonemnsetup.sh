@@ -481,24 +481,7 @@ function reSyncConf() {
    done
  }
  function UpgradeAndResync() {
-       while true; do
-       echo "You chose to upgrade your existing STONE masternode."
-       read -p "Are you sure? (y/n): " yn </dev/tty
-       case $yn in
-           [Yy]* ) echo "This should only take a moment."; sleep 2; upgradeNode;;
-           [Nn]* ) echo "Restarting..."; sleep 2; clear;;
-           * ) echo "Please answer yes or no.";;
-       esac
-   done
-    while true; do
-       echo "You chose to resync your existing STONE masternode."
-       read -p "Are you sure? (y/n): " yn </dev/tty
-       case $yn in
-           [Yy]* ) echo "This should only take a moment."; sleep 2; reSync;;
-           [Nn]* ) echo "Restarting..."; sleep 2; clear;;
-           * ) echo "Please answer yes or no.";;
-       esac
-   done
+   
 
  }
 
