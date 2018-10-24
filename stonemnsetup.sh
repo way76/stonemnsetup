@@ -468,7 +468,17 @@ function upgradeOnly() {
        esac
    done
  }
-
+function upgradeOnly1() {
+   while true; do
+       echo "You chose to upgrade your existing STONE masternode."
+       read -p "Are you sure? (y/n): " yn </dev/tty
+       case $yn in
+           [Yy]* ) echo "This should only take a moment."; sleep 2; upgradeNode;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
 function reSyncConf() {
    while true; do
        echo "You chose to resync your existing STONE masternode."
@@ -480,9 +490,20 @@ function reSyncConf() {
        esac
    done
  }
+ function reSyncConf1() {
+   while true; do
+       echo "You chose to resync your existing STONE masternode."
+       read -p "Are you sure? (y/n): " yn </dev/tty
+       case $yn in
+           [Yy]* ) echo "This should only take a moment."; sleep 2; reSync;;
+           [Nn]* ) echo "Restarting..."; sleep 2; clear; mainMenu; exit;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+ }
  function UpgradeAndResync() {
-   upgradeOnly();
-   reSyncConf();
+   upgradeOnly1;
+   reSyncConf1;
 
  }
 
