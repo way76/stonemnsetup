@@ -128,6 +128,7 @@ exit
 
 function reSync() {
   echo "$(date +%F_%T) Disabling Stone.service.." >> stonesync.log
+  echo "$(date +%F_%T) Resync in progress... ////////////////////////////////////////////////////////////////////////" >> stonesync.log
   stone-cli invalidateblock 0000000005877dd963455c138f7562acf67ce5985ca363a84c93e40f8fe57e1c
   systemctl restart Stone.service
   sleep 10
